@@ -1,9 +1,11 @@
+@page
+@model ContactModel
 @{
     ViewData["Title"] = "Contact";
 }
 <main aria-labelledby="title">
     <h2 id="title">@ViewData["Title"]</h2>
-    <h3>@ViewData["Message"]</h3>
+    <h3>@Model.Message</h3>
 
     <address>
         One Microsoft Way<br />
@@ -13,7 +15,19 @@
     </address>
 
     <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        <strong>Support:</strong>   <a asp-page="/Contact" asp-route-email="Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a asp-page="/Contact" asp-route-email="Marketing@example.com">Marketing@example.com</a>
     </address>
 </main>
+
+@code {
+    public class ContactModel : PageModel
+    {
+        public string Message { get; set; }
+
+        public void OnGet()
+        {
+            Message = "Your contact page.";
+        }
+    }
+}
