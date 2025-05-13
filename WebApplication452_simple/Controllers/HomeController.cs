@@ -21,6 +21,7 @@ namespace WebApplication452_simple.Controllers
             return View();
         }
 
+        [Route("Home/Error")]
         public IActionResult Error()
         {
             return View();
