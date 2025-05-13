@@ -4,7 +4,7 @@
     ViewData["Title"] = "Contact";
 }
 <main aria-labelledby="title">
-    <h2 id="title">@ViewData["Title"]</h2>
+    <h2 id="title">Contact</h2>
     <h3>@Model.Message</h3>
 
     <address>
@@ -23,10 +23,12 @@
 @code {
     public class ContactModel : PageModel
     {
+        public string Title { get; set; }
         public string Message { get; set; }
 
         public void OnGet()
         {
+            Title = "Contact";
             Message = "Your contact page.";
         }
     }
