@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using WebApplication452_simple.Models;
 
 namespace WebApplication452_simple.Controllers
 {
@@ -21,9 +23,10 @@ namespace WebApplication452_simple.Controllers
             return View();
         }
 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View();
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
