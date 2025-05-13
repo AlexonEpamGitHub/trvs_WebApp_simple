@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewData["Title"]</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <hgroup>
+    <header>
         <h1>@ViewData["ErrorTitle"]</h1>
         <h2>@ViewData["ErrorMessage"]</h2>
-    </hgroup>
+    </header>
+    <footer>
+        &copy; @DateTime.Now.Year - Your Application Name
+    </footer>
 </body>
 </html>
