@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication452_simple", "WebApplication452_simple\WebApplication452_simple.csproj", "{9C1E6FEB-1FAC-4620-996D-5EA895E15172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppResult_core8", "WebAppResult_core8\WebAppResult_core8.csproj", "{ECA3C8AE-0993-447C-A763-B9C50040BD1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9C1E6FEB-1FAC-4620-996D-5EA895E15172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C1E6FEB-1FAC-4620-996D-5EA895E15172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C1E6FEB-1FAC-4620-996D-5EA895E15172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECA3C8AE-0993-447C-A763-B9C50040BD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA3C8AE-0993-447C-A763-B9C50040BD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA3C8AE-0993-447C-A763-B9C50040BD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA3C8AE-0993-447C-A763-B9C50040BD1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
