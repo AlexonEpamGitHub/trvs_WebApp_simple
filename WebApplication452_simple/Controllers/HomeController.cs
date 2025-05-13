@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication452.Controllers
+namespace WebApplication452_simple.Controllers
 {
     public class HomeController : Controller
     {
@@ -21,7 +21,6 @@ namespace WebApplication452.Controllers
             return View();
         }
 
-        [Route("Home/Error")]
         public IActionResult Error()
         {
             return View();
