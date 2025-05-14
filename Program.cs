@@ -24,6 +24,11 @@ namespace YourNamespace
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseKestrel();
                     webBuilder.UseIISIntegration();
+                })
+                .UseDefaultServiceProvider((context, options) =>
+                {
+                    options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+                    options.ValidateOnBuild = true;
                 });
     }
 }
