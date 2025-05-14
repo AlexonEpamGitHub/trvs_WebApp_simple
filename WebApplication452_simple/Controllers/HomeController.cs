@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using WebApplication452_simple.Models;
 
 namespace WebApplication452_simple.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public IActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewData["Message"] = "Your application description page.";
             return View();
         }
 
-        public ActionResult Contact()
+        public IActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewData["Message"] = "Your contact page.";
             return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
