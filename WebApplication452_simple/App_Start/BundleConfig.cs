@@ -1,12 +1,16 @@
-﻿using System.Web;
-using System.Web.Optimization;
+using Microsoft.AspNetCore.Optimization;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApplication452_simple
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
-        public static void RegisterBundles(BundleCollection bundles)
+        public static void RegisterBundles(IServiceCollection services)
+        {
+            services.AddOptimization();
+        }
+
+        public static void ConfigureBundles(IBundleProvider bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
