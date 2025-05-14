@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Contact";
 }
 <main aria-labelledby="title">
@@ -13,7 +13,7 @@
     </address>
 
     <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        <strong>Support:</strong> <a asp-area="" asp-controller="Home" asp-action="Contact" asp-route-email="Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a asp-area="" asp-controller="Home" asp-action="Contact" asp-route-email="Marketing@example.com">Marketing@example.com</a>
     </address>
 </main>
