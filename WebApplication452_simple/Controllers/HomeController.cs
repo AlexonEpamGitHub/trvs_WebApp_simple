@@ -2,32 +2,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication452_simple.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class HomeController : ControllerBase
+    public class HomeController : Controller
     {
-        [HttpGet("index")]
         public IActionResult Index()
         {
-            return Ok("Index page");
+            return View();
         }
 
-        [HttpGet("about")]
         public IActionResult About()
         {
-            return Ok(new { Message = "Your application description page." });
+            ViewData["Message"] = "Your application description page.";
+            return View();
         }
 
-        [HttpGet("contact")]
         public IActionResult Contact()
         {
-            return Ok(new { Message = "Your contact page." });
+            ViewData["Message"] = "Your contact page.";
+            return View();
         }
 
-        [HttpGet("error")]
         public IActionResult Error()
         {
-            return StatusCode(500, "Internal server error");
+            return View();
         }
     }
 }
