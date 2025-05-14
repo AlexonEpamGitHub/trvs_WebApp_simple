@@ -3,9 +3,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>WebApplication452_simple</RootNamespace>
     <AssemblyName>WebApplication452_simple</AssemblyName>
-    <OutputType>Library</OutputType>
-    <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
   </PropertyGroup>
 
   <ItemGroup>
