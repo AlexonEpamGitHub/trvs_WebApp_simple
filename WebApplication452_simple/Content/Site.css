@@ -18,3 +18,25 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Modernize padding for better compatibility with modern browsers */
+.body-content {
+    padding: 1em;
+}
+
+/* Ensure consistent box-sizing for form elements */
+input,
+select,
+textarea {
+    box-sizing: border-box;
+}
+
+/* Add responsive styling for form input elements */
+@media (max-width: 768px) {
+    input,
+    select,
+    textarea {
+        max-width: 100%;
+        width: 100%;
+    }
+}
