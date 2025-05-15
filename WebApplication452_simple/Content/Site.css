@@ -1,20 +1,58 @@
-﻿/* Set padding to keep content from hitting the edges */
+/* Enhanced compatibility with modern browsers and responsiveness using best practices */
+
+/* General body content styling */
 .body-content {
     margin-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
+    box-sizing: border-box; /* Ensure padding is included in width calculations */
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+/* Override the default Bootstrap behavior for horizontal description lists 
+   to prevent truncation of terms in the left column */
 .dl-horizontal dt {
     white-space: normal;
+    overflow-wrap: break-word; /* Ensure long words break properly */
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+/* Input, select, and textarea adjustments for responsiveness */
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%; /* Ensure inputs are responsive */
+    width: 100%; /* Full width within their container */
+    box-sizing: border-box; /* Include padding and border in width calculations */
+    padding: 0.375rem 0.75rem; /* Add modern Bootstrap-compatible padding */
+    font-size: 1rem; /* Use a responsive font size */
+    border: 1px solid #ced4da; /* Match Bootstrap's border style */
+    border-radius: 0.25rem; /* Add rounded corners for a modern appearance */
+}
+
+/* Add responsiveness for the body content */
+@media (max-width: 768px) {
+    .body-content {
+        padding-left: 10px;
+        padding-right: 10px; /* Reduce padding on smaller screens */
+    }
+}
+
+/* Enhanced Bootstrap integration for forms */
+form {
+    margin-bottom: 1rem; /* Add spacing between forms and other elements */
+}
+
+/* Add support for dark mode */
+@media (prefers-color-scheme: dark) {
+    .body-content {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text for contrast */
+    }
+
+    input,
+    select,
+    textarea {
+        background-color: #1e1e1e; /* Dark input background */
+        color: #ffffff; /* Light text */
+        border: 1px solid #333333; /* Subtle border */
+    }
 }
