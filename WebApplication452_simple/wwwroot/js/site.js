@@ -1,0 +1,1 @@
+// Move this file to the wwwroot/js folder. Update any paths referencing this file in the application to ~/js/site.js.
