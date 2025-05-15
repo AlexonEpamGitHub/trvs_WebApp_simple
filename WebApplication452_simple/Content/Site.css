@@ -1,20 +1,51 @@
-﻿/* Set padding to keep content from hitting the edges */
+/* Modernized CSS to align with Bootstrap 5 conventions */
+
+/* Set padding to keep content from hitting the edges with rem-based units */
 .body-content {
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-top: 1rem; /* Equivalent to 16px assuming the root font size is 16px */
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+/* Override the default Bootstrap behavior for horizontal description lists 
+   to prevent truncation of terms that are too long */
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+/* Set width on form input elements using rem-based units for better scalability */
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 17.5rem; /* Equivalent to 280px assuming the root font size is 16px */
 }
+
+/* Ensure compatibility with Bootstrap 5 by removing deprecated classes or adjusting spacing */
+.form-group {
+    margin-bottom: 1rem; /* Adjust spacing to align with Bootstrap 5 conventions */
+}
+
+/* Add additional utility styles if needed */
+.btn-custom {
+    background-color: #007bff; /* Primary button color */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+/* Ensure responsive design adherence with Bootstrap 5 conventions */
+@media (max-width: 576px) {
+    .body-content {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .body-content {
+        margin-top: 2rem; /* Slightly larger margin for medium screens */
+    }
+}
+
+/* File location: wwwroot/css/site.css */
+
