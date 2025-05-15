@@ -6,6 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddRouting(options =>
+{
+    options.LowercaseUrls = true;
+    options.AppendTrailingSlash = false;
+});
+
+// Additional configuration for .NET 8 standards (if needed)
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -47,5 +56,8 @@ app.MapControllerRoute(
     name: "admin",
     pattern: "admin/{action=Dashboard}/{id?}",
     defaults: new { controller = "Admin" });
+
+// Razor Pages route configuration
+app.MapRazorPages();
 
 app.Run();
