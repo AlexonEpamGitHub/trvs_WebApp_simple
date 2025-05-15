@@ -1,0 +1,1 @@
+/* Placeholder for moved content from Scripts/bootstrap.bundle.js */
