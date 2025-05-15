@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication452_simple.Controllers
 {
-    public class HomeController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class HomeController : ControllerBase
     {
-        public ActionResult Index()
+        [HttpGet("index")]
+        public IActionResult Index()
         {
-            return View();
+            return Ok("Index page");
         }
 
-        public ActionResult About()
+        [HttpGet("about")]
+        public IActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return Ok(new { Message = "Your application description page." });
         }
 
-        public ActionResult Contact()
+        [HttpGet("contact")]
+        public IActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return Ok(new { Message = "Your contact page." });
         }
     }
 }
