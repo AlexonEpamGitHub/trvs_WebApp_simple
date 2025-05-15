@@ -4,6 +4,14 @@
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
     <AssemblyName>WebApplication452_simple</AssemblyName>
+    <AssemblyTitle>WebApplication452_simple</AssemblyTitle>
+    <AssemblyDescription></AssemblyDescription>
+    <AssemblyCompany></AssemblyCompany>
+    <AssemblyProduct>WebApplication452_simple</AssemblyProduct>
+    <AssemblyCopyright>Copyright © 2025</AssemblyCopyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+    <AssemblyGuid>76761fed-b265-41da-8957-53f0fd3aabad</AssemblyGuid>
     <RootNamespace>WebApplication452_simple</RootNamespace>
     <OutputType>Library</OutputType>
   </PropertyGroup>
