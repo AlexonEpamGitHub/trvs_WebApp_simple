@@ -24,7 +24,10 @@ builder.Services.AddMvc().AddRazorPagesOptions(options =>
     options.Conventions.AddAreaFolderRoute("User", "/User", "User/{controller=Home}/{action=Index}/{id?}");
 });
 
-// For bundling and minification, you may consider using a middleware or library like WebOptimizer, but for simplicity, we skip it in this example.
+// Example dependency injection configurations
+builder.Services.AddTransient<IMyService, MyService>();
+builder.Services.AddScoped<IMyOtherService, MyOtherService>();
+builder.Services.AddSingleton<IMySingletonService, MySingletonService>();
 
 var app = builder.Build();
 
