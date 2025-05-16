@@ -1,7 +1,6 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication452_simple.Controllers
+namespace Microsoft.AspNetCore.Mvc.Controllers
 {
     public class HomeController : Controller
     {
