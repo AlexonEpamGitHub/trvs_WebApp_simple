@@ -1,9 +1,8 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
+@model ContactViewModel
+
 <main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
+    <h2 id="title">@Model.Title</h2>
+    <h3>@Model.Message</h3>
 
     <address>
         One Microsoft Way<br />
@@ -13,7 +12,7 @@
     </address>
 
     <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        <strong>Support:</strong> <a href="mailto:@Model.SupportEmail">@Model.SupportEmail</a><br />
+        <strong>Marketing:</strong> <a href="mailto:@Model.MarketingEmail">@Model.MarketingEmail</a>
     </address>
 </main>
