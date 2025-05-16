@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register services
+// Area Registration (Equivalent to AreaRegistration.RegisterAllAreas())
 builder.Services.AddControllersWithViews(options =>
 {
-    // Adding global filter configuration logic
-    options.Filters.Add(new HandleErrorAttribute());
+    options.Filters.Add(new HandleErrorAttribute()); // Global Filters Configuration
 }).AddMvcOptions(options => options.Filters.Add(new HandleErrorAttribute()));
 
 var app = builder.Build();
@@ -31,10 +30,12 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    // Map the default route as per legacy application's routing logic
+    // Routing Setup
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
+
+// Note: Bundle registration (BundleConfig.RegisterBundles) is excluded as it's not applicable in .NET Core.
 
 app.Run();
