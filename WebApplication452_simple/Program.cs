@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Register services
 builder.Services.AddControllersWithViews(options =>
 {
+    // Adding global filter configuration logic
     options.Filters.Add(new HandleErrorAttribute());
 }).AddMvcOptions(options => options.Filters.Add(new HandleErrorAttribute()));
 
