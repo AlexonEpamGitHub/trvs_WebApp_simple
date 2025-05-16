@@ -4,8 +4,11 @@ namespace WebApplication452_simple.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IServiceProvider _serviceProvider;
+
+        public HomeController(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
         }
 
         public IActionResult Index()
