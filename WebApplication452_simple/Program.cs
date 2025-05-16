@@ -30,6 +30,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
+    // Map the default route as per legacy application's routing logic
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
