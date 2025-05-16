@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication8.Controllers
+namespace NewProjectNamespace.Controllers
 {
     public class HomeController : ControllerBase
     {
         public IActionResult Index()
         {
-            return View();
+            return Ok("Index page content");
         }
 
         public IActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var message = "Your application description page.";
+            return Ok(new { Message = message });
         }
 
         public IActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var message = "Your contact page.";
+            return Ok(new { Message = message });
         }
     }
 }
