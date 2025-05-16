@@ -13,10 +13,11 @@ var app = builder.Build();
 app.UseStaticFiles();
 app.UseRouting();
 
-// Configure routes
+// Configure routes using ASP.NET Core's routing configuration
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 // Run the application
 app.Run();
