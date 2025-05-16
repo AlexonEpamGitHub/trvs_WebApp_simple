@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - My ASP.NET Application</title>
-    <link href="/css/site.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -31,9 +31,9 @@
         </footer>
     </div>
 
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/modernizr.js"></script>
+    <script src="~/js/jquery.js" asp-append-version="true"></script>
+    <script src="~/js/bootstrap.js" asp-append-version="true"></script>
+    <script src="~/js/modernizr.js" asp-append-version="true"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
