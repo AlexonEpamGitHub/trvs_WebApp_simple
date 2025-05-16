@@ -1,23 +1,36 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace WebApplication452_simple
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    public class RouteConfig
-    {
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-        }
-    }
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
+
+app.Run();
