@@ -27,14 +27,18 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    // Configure routing using endpoints.MapControllerRoute
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// For area routing, add area registration equivalent
-app.MapAreaControllerRoute(
-    name: "areaName",
-    areaName: "AreaName",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    // For area routing, add area registration equivalent
+    endpoints.MapAreaControllerRoute(
+        name: "areaName",
+        areaName: "AreaName",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();
