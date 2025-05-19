@@ -16,7 +16,6 @@ namespace WebApplication452_simple
                 RequestPath = ""
             });
 
-            // Add bundling and minification logic manually
             // For JavaScript files
             app.UseStaticFiles(new StaticFileOptions
             {
