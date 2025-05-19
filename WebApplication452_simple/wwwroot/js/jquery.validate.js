@@ -1,0 +1,1 @@
+Content of jquery.validate.js copied from WebApplication452_simple/Scripts/jquery.validate.js
