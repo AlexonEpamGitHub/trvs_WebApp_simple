@@ -5,21 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication452.Controllers
 {
-    public class HomeController : ControllerBase
+    public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
-            return Ok("Index page");
+            return View("Index");
         }
 
+        [HttpGet]
         public IActionResult About()
         {
-            return Ok("Your application description page.");
+            return View("About");
         }
 
+        [HttpGet]
         public IActionResult Contact()
         {
-            return Ok("Your contact page.");
+            return View("Contact");
         }
     }
 }
