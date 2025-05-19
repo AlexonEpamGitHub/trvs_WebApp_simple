@@ -1,0 +1,1 @@
+In ASP.NET Core, bundling and minification are handled differently. Use tools like Webpack, Gulp, or the built-in BundlerMinifier to manage CSS and JavaScript files.
