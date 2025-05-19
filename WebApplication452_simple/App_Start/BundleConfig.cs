@@ -7,14 +7,19 @@ namespace WebApplication452_simple
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configure MVC with views
             services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            // Enable serving static files
             app.UseStaticFiles();
+
+            // Enable routing
             app.UseRouting();
 
+            // Configure endpoints for controllers
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -32,6 +37,7 @@ namespace WebApplication452_simple
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebApplication452_simple</title>
+    <!-- Stylesheets should be directly included here -->
     <link rel="stylesheet" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" href="~/Content/site.css" />
 </head>
@@ -47,6 +53,7 @@ namespace WebApplication452_simple
     <footer class="text-center">
         <p>&copy; @DateTime.Now.Year - WebApplication452_simple</p>
     </footer>
+    <!-- Scripts should be directly included here -->
     <script src="~/Scripts/jquery-3.6.0.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
