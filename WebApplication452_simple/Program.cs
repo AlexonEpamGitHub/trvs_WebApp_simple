@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using YourNamespace.RouteConfig; // Replace 'YourNamespace' with the actual namespace of RouteConfig
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +24,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-RouteConfig.RegisterRoutes(app);
+// Define routing directly using MapControllerRoute for the default route.
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();
