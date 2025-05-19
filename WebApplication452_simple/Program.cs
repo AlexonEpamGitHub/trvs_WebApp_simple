@@ -2,15 +2,27 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+// Register services
+builder.Services.AddControllersWithViews().AddMvcOptions(options =>
+{
+    options.Filters.Add(new HandleErrorAttribute());
+});
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+// Register areas
+AreaRegistration.RegisterAllAreas();
+
+// Configure middleware pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
@@ -18,14 +30,19 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();
 
-// Configure route mapping
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
+
+// Ensure bundles are handled through modern tools (Webpack/Gulp)
+// Note: The actual setup of Webpack or Gulp is typically outside the scope of this file.
+// You would configure those tools in their respective configuration files (e.g., webpack.config.js or gulpfile.js).
 
 app.Run();
