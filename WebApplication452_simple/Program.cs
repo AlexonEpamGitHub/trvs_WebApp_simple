@@ -36,6 +36,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
+    // Add routing logic from RouteConfig.cs
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
