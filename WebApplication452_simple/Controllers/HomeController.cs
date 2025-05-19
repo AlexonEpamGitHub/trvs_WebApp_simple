@@ -1,29 +1,30 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication452_simple.Controllers
+namespace Microsoft.AspNetCore.Mvc.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await Task.CompletedTask; // Simulating asynchronous operation, replace with actual async logic if needed
             return View();
         }
 
-        public ActionResult About()
+        public async Task<IActionResult> About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewData["Message"] = "Your application description page.";
+            await Task.CompletedTask; // Simulating asynchronous operation, replace with actual async logic if needed
             return View();
         }
 
-        public ActionResult Contact()
+        public async Task<IActionResult> Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewData["Message"] = "Your contact page.";
+            await Task.CompletedTask; // Simulating asynchronous operation, replace with actual async logic if needed
             return View();
         }
     }
