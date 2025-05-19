@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +15,12 @@ namespace WebApplication452_simple.Controllers
         public IActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public IActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
