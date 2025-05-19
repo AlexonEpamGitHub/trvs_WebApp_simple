@@ -1,0 +1,1 @@
+Content of bootstrap.js copied from WebApplication452_simple/Scripts/bootstrap.js
