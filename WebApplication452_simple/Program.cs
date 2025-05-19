@@ -22,8 +22,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Apply routing logic from RouteConfig.cs
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "legacyRoute",
+    pattern: "{controller}/{action}/{id?}");
 
 app.Run();
