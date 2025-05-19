@@ -19,8 +19,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Migrated route configuration logic from WebApplication452_simple/App_Start/RouteConfig.cs
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "customRoute",
+    pattern: "custom/{controller=Custom}/{action=Action}/{id?}");
 
 app.Run();
