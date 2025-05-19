@@ -47,12 +47,17 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Configure endpoint routing
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
+// Register all areas
+AreaRegistration.RegisterAllAreas();
+
+// Configure routes
+RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+// Register bundles
+BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
