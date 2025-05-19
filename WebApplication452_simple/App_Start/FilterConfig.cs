@@ -1,25 +1,46 @@
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApplication452_simple
 {
-    public class FilterConfig
+    public class Startup
     {
-        // Removed RegisterGlobalFilters method as the global filter configuration logic is migrated to Program.cs
-    }
-}
-
-// Program.cs
-using System.Web.Mvc;
-using System.Web;
-
-namespace WebApplication452_simple
-{
-    public class MvcApplication : HttpApplication
-    {
-        protected void Application_Start()
+        public void ConfigureServices(IServiceCollection services)
         {
-            // Configure global filters here
-            GlobalFilters.Filters.Add(new HandleErrorAttribute());
+            services.AddControllersWithViews(options =>
+            {
+                // Configure global filters here
+                options.Filters.Add(new HandleErrorAttribute());
+            });
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
