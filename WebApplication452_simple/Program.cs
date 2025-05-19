@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,12 +12,18 @@ namespace WebApplication452_simple
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Load configuration from appsettings.json
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            
+            // Configure services based on appsettings.json
+            var appSettings = builder.Configuration.GetSection("AppSettings");
+            
+            builder.Services.Configure<AppSettings>(appSettings);
             builder.Services.AddControllersWithViews();
             builder.Services.AddRouting();
             builder.Services.AddExceptionHandler(options =>
             {
-                options.ExceptionHandlingPath = "/Home/Error";
+                options.ExceptionHandlingPath = appSettings["ExceptionHandlingPath"] ?? "/Home/Error";
             });
 
             var app = builder.Build();
@@ -24,7 +31,7 @@ namespace WebApplication452_simple
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(appSettings["ExceptionHandlingPath"] ?? "/Home/Error");
                 app.UseHsts();
             }
 
@@ -34,15 +41,21 @@ namespace WebApplication452_simple
             app.UseRouting();
 
             // Add exception handling middleware.
-            app.UseExceptionHandler("/Home/Error");
+            app.UseExceptionHandler(appSettings["ExceptionHandlingPath"] ?? "/Home/Error");
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: appSettings["DefaultRoutePattern"] ?? "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
+    }
+
+    public class AppSettings
+    {
+        public string ExceptionHandlingPath { get; set; }
+        public string DefaultRoutePattern { get; set; }
     }
 }
