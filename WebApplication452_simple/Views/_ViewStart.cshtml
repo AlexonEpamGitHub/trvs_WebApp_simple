@@ -2,3 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (!System.IO.File.Exists(Context.Request.PathBase + "/Views/Shared/_Layout.cshtml"))
+{
+    throw new System.IO.FileNotFoundException("The specified Layout file '~/Views/Shared/_Layout.cshtml' was not found. Please verify the file path and ensure it exists in the project structure.");
+}
