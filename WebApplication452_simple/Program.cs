@@ -13,6 +13,11 @@ namespace WebApplication452_simple
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRouting();
+            builder.Services.AddExceptionHandler(options =>
+            {
+                options.ExceptionHandlingPath = "/Home/Error";
+            });
 
             var app = builder.Build();
 
@@ -27,6 +32,9 @@ namespace WebApplication452_simple
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            // Add exception handling middleware.
+            app.UseExceptionHandler("/Home/Error");
 
             app.UseAuthorization();
 
