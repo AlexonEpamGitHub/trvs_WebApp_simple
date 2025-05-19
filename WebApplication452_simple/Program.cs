@@ -1,22 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.FileProviders;
-using System.IO;
-using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Register services
 builder.Services.AddControllersWithViews(); // Adding MVC services
 
-// Add response compression for better performance
-builder.Services.AddResponseCompression(options =>
+// Register additional services for areas, filters, routes, and bundles
+builder.Services.AddMvc(options =>
 {
-    options.EnableForHttps = true;
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 });
-
-var app = builder.Build();
 
 // Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
@@ -26,20 +22,16 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-// Configure static file middleware with additional options
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
-    RequestPath = "/static"
-});
-
-// Use response compression middleware
-app.UseResponseCompression();
+app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Register areas, filters, routes, and bundles
+AreaRegistration.RegisterAllAreas();
+RouteConfig.RegisterRoutes(app);
+BundleConfig.RegisterBundles();
 
 // Configure routes using UseEndpoints
 app.UseEndpoints(endpoints =>
