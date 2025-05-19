@@ -1,0 +1,1 @@
+Content of modernizr-2.8.3.js copied from WebApplication452_simple/Scripts/modernizr-2.8.3.js
