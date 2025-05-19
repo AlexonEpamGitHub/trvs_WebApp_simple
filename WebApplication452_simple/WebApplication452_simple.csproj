@@ -9,16 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Framework references -->
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <!-- Necessary NuGet package references for ASP.NET Core -->
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
