@@ -47,14 +47,16 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Register all areas
-AreaRegistration.RegisterAllAreas();
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
-// Configure routes
-RouteConfig.RegisterRoutes(RouteTable.Routes);
+// Register areas
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-// Register bundles
-BundleConfig.RegisterBundles(BundleTable.Bundles);
+// Register global filters
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(new Microsoft.AspNetCore.Mvc.Filters);
 
 app.MapControllerRoute(
     name: "default",
