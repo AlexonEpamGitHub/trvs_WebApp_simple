@@ -9,9 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Register MVC services and configure global filters.
 builder.Services.AddControllersWithViews(options =>
 {
-    // Add global filters here.
-    options.Filters.Add(new Microsoft.AspNetCore.Mvc.Filters.AllowAnonymousFilter()); // Example filter, replace with actual filters as needed.
-    // Add more filters as necessary.
+    // Create an instance of MvcOptions to configure filters.
+    var mvcOptions = new MvcOptions();
+    
+    // Add global filters here, such as HandleErrorAttribute or others.
+    mvcOptions.Filters.Add(new Microsoft.AspNetCore.Mvc.Filters.HandleErrorAttribute());
+    
+    // Apply MvcOptions to the options.Filters collection.
+    foreach (var filter in mvcOptions.Filters)
+    {
+        options.Filters.Add(filter);
+    }
 });
 
 var app = builder.Build();
