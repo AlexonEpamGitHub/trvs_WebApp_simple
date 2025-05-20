@@ -1,14 +1,22 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Load configuration from appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 // Add support for areas.
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+// Register app settings and connection strings from configuration
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 var app = builder.Build();
 
@@ -45,30 +53,14 @@ app.UseStaticFiles();
 
 app.UseAuthorization();
 
-// Define routes using MapControllerRoute and migrate legacy logic from RouteConfig.cs
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
-    name: "customRoute",
-    pattern: "Custom/{controller=Custom}/{action=Action}/{id?}");
 
 app.MapAreaControllerRoute(
     name: "areas",
     areaName: "MyArea",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-// Example of additional legacy route configuration migrated from RouteConfig.cs
-app.MapControllerRoute(
-    name: "legacyRoute1",
-    pattern: "Legacy/{controller}/{action}/{year}/{month}",
-    defaults: new { controller = "Legacy", action = "Index" });
-
-app.MapControllerRoute(
-    name: "legacyRoute2",
-    pattern: "Old/{controller}/{action}/{category}/{subcategory}",
-    defaults: new { controller = "Old", action = "Details" });
 
 // Register static bundles
 // Note: ASP.NET Core does not have direct support for BundleConfig like ASP.NET MVC.
@@ -76,3 +68,10 @@ app.MapControllerRoute(
 // Here, we assume static file serving is configured.
 
 app.Run();
+
+// Define AppSettings class to map custom settings from appsettings.json
+public class AppSettings
+{
+    public string CustomSetting { get; set; }
+    public string ConnectionString { get; set; }
+}
