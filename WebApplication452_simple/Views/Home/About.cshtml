@@ -1,9 +1,17 @@
-﻿@{
+@{
     ViewBag.Title = "About";
 }
 <main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
+    <h2 id="title">@ViewBag.Title</h2>
     <h3>@ViewBag.Message</h3>
 
     <p>Use this area to provide additional information.</p>
 </main>
+
+@section Styles {
+    <link rel="stylesheet" href="/css/styles.css" />
+}
+
+@section Scripts {
+    <script src="/js/scripts.js"></script>
+}
