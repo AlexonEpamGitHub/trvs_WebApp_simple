@@ -4,9 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(options => {
+builder.Services.AddControllersWithViews(options =>
+{
     options.Filters.Add(new HandleErrorFilter());
+    options.Filters.Add(new AuthorizeFilter()); // Example: Add additional filters if needed
 });
+
+// Register areas
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -24,8 +29,15 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    // Configure routes
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    // Map Razor Pages for areas
+    endpoints.MapRazorPages();
+});
 
 app.Run();
