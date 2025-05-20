@@ -29,9 +29,6 @@ namespace WebApplication452_simple
                 app.UseHsts();
             }
 
-            // Register Areas logic here if needed
-            // Example: Area registration is typically handled via conventional routing in ASP.NET Core.
-
             // Middleware to handle CSS and JavaScript bundling
             app.Use(async (context, next) =>
             {
@@ -80,10 +77,25 @@ namespace WebApplication452_simple
             app.UseRouting();
             app.UseAuthorization();
 
-            // Register Routes
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            // Routing logic migrated from RouteConfig.cs
+            app.UseEndpoints(endpoints =>
+            {
+                // Define conventional routes
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                // Example for custom routes
+                endpoints.MapControllerRoute(
+                    name: "customRoute",
+                    pattern: "custom/{controller=Custom}/{action=Index}/{param?}");
+
+                // Area routes
+                endpoints.MapAreaControllerRoute(
+                    name: "admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.Run();
         }
