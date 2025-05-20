@@ -1,7 +1,20 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+@model YourNamespace.Models.YourModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Home Page";
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - My Application</title>
+    <link rel="stylesheet" href="/css/site.css" />
+    <script src="/js/site.js"></script>
+</head>
+<body>
 <main>
     <section class="row" aria-labelledby="aspnetTitle">
         <h1 id="title">ASP.NET</h1>
@@ -31,3 +44,5 @@
         </section>
     </div>
 </main>
+</body>
+</html>
