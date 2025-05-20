@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -24,42 +23,42 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="wwwroot\css\bootstrap-grid.css" />
+    <Content Include="wwwroot\css\bootstrap-grid.min.css" />
+    <Content Include="wwwroot\css\bootstrap-grid.rtl.css" />
+    <Content Include="wwwroot\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="wwwroot\css\bootstrap-reboot.css" />
+    <Content Include="wwwroot\css\bootstrap-reboot.min.css" />
+    <Content Include="wwwroot\css\bootstrap-reboot.rtl.css" />
+    <Content Include="wwwroot\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="wwwroot\css\bootstrap-utilities.css" />
+    <Content Include="wwwroot\css\bootstrap-utilities.min.css" />
+    <Content Include="wwwroot\css\bootstrap-utilities.rtl.css" />
+    <Content Include="wwwroot\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="wwwroot\css\bootstrap.css" />
+    <Content Include="wwwroot\css\bootstrap.min.css" />
+    <Content Include="wwwroot\css\bootstrap.rtl.css" />
+    <Content Include="wwwroot\css\bootstrap.rtl.min.css" />
+    <Content Include="wwwroot\favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
-    <Content Include="Scripts\jquery-3.7.0.js" />
-    <Content Include="Scripts\jquery-3.7.0.min.js" />
-    <Content Include="Scripts\jquery-3.7.0.slim.js" />
-    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="wwwroot\css\Site.css" />
+    <Content Include="wwwroot\js\bootstrap.bundle.js" />
+    <Content Include="wwwroot\js\bootstrap.bundle.min.js" />
+    <Content Include="wwwroot\js\bootstrap.esm.js" />
+    <Content Include="wwwroot\js\bootstrap.esm.min.js" />
+    <Content Include="wwwroot\js\bootstrap.js" />
+    <Content Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\jquery-3.7.0.intellisense.js" />
+    <Content Include="wwwroot\js\jquery-3.7.0.js" />
+    <Content Include="wwwroot\js\jquery-3.7.0.min.js" />
+    <Content Include="wwwroot\js\jquery-3.7.0.slim.js" />
+    <Content Include="wwwroot\js\jquery-3.7.0.slim.min.js" />
+    <None Include="wwwroot\js\jquery.validate-vsdoc.js" />
+    <Content Include="wwwroot\js\jquery.validate.js" />
+    <Content Include="wwwroot\js\jquery.validate.min.js" />
+    <Content Include="wwwroot\js\jquery.validate.unobtrusive.js" />
+    <Content Include="wwwroot\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="wwwroot\js\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -79,6 +78,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>
