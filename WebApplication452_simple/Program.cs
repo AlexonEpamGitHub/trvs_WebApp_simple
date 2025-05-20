@@ -12,6 +12,9 @@ builder.Services.AddControllers(options =>
     options.Filters.Add(new HandleErrorAttribute());
 });
 
+// Add middleware services
+builder.Services.AddResponseCompression();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -22,6 +25,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseResponseCompression();
 app.UseStaticFiles();
 
 app.UseRouting();
