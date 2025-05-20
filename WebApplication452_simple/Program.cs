@@ -77,7 +77,28 @@ namespace WebApplication452_simple
             app.UseRouting();
             app.UseAuthorization();
 
-            // Routing logic migrated from RouteConfig.cs
+            // Migrate application startup logic from Global.asax.cs
+            app.Use(async (context, next) =>
+            {
+                // Example of logic that could have been in Application_BeginRequest
+                if (context.Request.Path.StartsWithSegments("/healthcheck"))
+                {
+                    context.Response.ContentType = "text/plain";
+                    await context.Response.WriteAsync("Healthy");
+                    return;
+                }
+
+                await next();
+            });
+
+            app.Use(async (context, next) =>
+            {
+                // Example of logic that could have been in Application_EndRequest
+                context.Response.Headers.Add("X-Processed-Time", System.DateTime.UtcNow.ToString());
+                await next();
+            });
+
+            // Routing logic migrated from Global.asax.cs and RouteConfig.cs
             app.UseEndpoints(endpoints =>
             {
                 // Define conventional routes
