@@ -11,28 +11,15 @@ namespace WebApplication452_simple
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
-            host.Run();
-        }
+            var builder = WebApplication.CreateBuilder(args);
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+            // Register services
+            builder.Services.AddControllersWithViews();
 
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllersWithViews();
-        }
+            var app = builder.Build();
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
+            // Environment-specific configurations
+            if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -42,8 +29,8 @@ namespace WebApplication452_simple
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            // Register Areas logic here if needed
+            // Example: Area registration is typically handled via conventional routing in ASP.NET Core.
 
             // Middleware to handle CSS and JavaScript bundling
             app.Use(async (context, next) =>
@@ -87,14 +74,18 @@ namespace WebApplication452_simple
                 await next();
             });
 
+            // Configure Middleware
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            // Register Routes
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Run();
         }
     }
 }
