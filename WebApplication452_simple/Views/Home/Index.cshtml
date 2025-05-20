@@ -1,6 +1,6 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = ViewBag.Title;
+    ViewData["Title"] = ViewBag.Title ?? "Default Title";
 }
 
 <main>
@@ -32,3 +32,11 @@
         </section>
     </div>
 </main>
+
+@section Styles {
+    <link href="~/css/site.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}
