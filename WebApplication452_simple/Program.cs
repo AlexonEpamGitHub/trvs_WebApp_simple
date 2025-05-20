@@ -9,17 +9,36 @@ builder.Services.AddControllersWithViews(options =>
 {
     // Register HandleErrorAttribute as a global filter
     options.Filters.Add(new HandleErrorAttribute());
+
+    // Enable legacy compatibility options
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+});
+
+builder.Services.Configure<MvcOptions>(options =>
+{
+    // Enable detailed error messages in debug mode
+    options.AllowInputFormatterExceptionMessages = true;
 });
 
 var app = builder.Build();
 
+builder.Services.Configure<MvcOptions>(options =>
+{
+    // Enable detailed error messages in debug mode (equivalent to debug=true in Web.config)
+    options.AllowInputFormatterExceptionMessages = true;
+});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    // Middleware for handling exceptions
+    // Middleware for handling exceptions (equivalent to <customErrors> in Web.config)
     app.UseExceptionHandler("/Home/Error");
+
+    // Enable HSTS for production environments
     app.UseHsts();
 }
+
+AppContext.SetSwitch("System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization", true);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
