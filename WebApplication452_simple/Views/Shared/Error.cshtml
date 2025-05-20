@@ -1,13 +1,36 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
 </head>
 <body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        var exceptionDetails = HttpContext.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
+    }
+    <header>
+        <hgroup>
+            <h1>Error</h1>
+            <h2>An error occurred while processing your request.</h2>
+        </hgroup>
+    </header>
+    <main>
+        @if (exceptionDetails != null)
+        {
+            <section>
+                <h3>Error Details</h3>
+                <p><strong>Path:</strong> @exceptionDetails.Path</p>
+                <p><strong>Message:</strong> @exceptionDetails.Error?.Message</p>
+                <p><strong>Stack Trace:</strong></p>
+                <pre>@exceptionDetails.Error?.StackTrace</pre>
+            </section>
+        }
+        else
+        {
+            <p>No error details are available.</p>
+        }
+    </main>
 </body>
 </html>
