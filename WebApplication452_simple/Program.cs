@@ -1,7 +1,15 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add configuration from appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+// Bind configuration settings
+var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
+var compilationSettings = builder.Configuration.GetSection("CompilationSettings").Get<CompilationSettings>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(options =>
@@ -12,6 +20,10 @@ builder.Services.AddControllersWithViews(options =>
 
 // Register areas
 builder.Services.AddRazorPages();
+
+// Register configuration settings as singleton services
+builder.Services.AddSingleton(appSettings);
+builder.Services.AddSingleton(compilationSettings);
 
 var app = builder.Build();
 
@@ -41,3 +53,19 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+// AppSettings class
+public class AppSettings
+{
+    public string ApplicationName { get; set; }
+    public string Version { get; set; }
+    // Add other properties as needed
+}
+
+// CompilationSettings class
+public class CompilationSettings
+{
+    public bool EnableDebug { get; set; }
+    public string TargetFramework { get; set; }
+    // Add other properties as needed
+}
