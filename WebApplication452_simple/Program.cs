@@ -17,9 +17,19 @@ app.UseRouting();
 
 app.UseEndpoints(endpoints =>
 {
+    // Import routing configuration from RouteConfig.cs
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    // Additional custom routes
+    endpoints.MapControllerRoute(
+        name: "customRoute",
+        pattern: "Custom/{controller}/{action}/{id?}");
+
+    endpoints.MapControllerRoute(
+        name: "adminRoute",
+        pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
 });
 
 app.Run();
