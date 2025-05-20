@@ -12,7 +12,16 @@ builder.Services.AddControllersWithViews(options =>
 
     // Enable legacy compatibility options
     options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+
+    // Register global filters (equivalent to FilterConfig.RegisterGlobalFilters)
+    options.Filters.Add(new AuthorizeFilter());
 });
+
+// Register areas (equivalent to AreaRegistration.RegisterAllAreas)
+builder.Services.AddRazorPages();
+
+// Configure bundling (static files middleware for client-side bundling tools)
+builder.Services.AddStaticFiles();
 
 builder.Services.Configure<MvcOptions>(options =>
 {
@@ -50,6 +59,10 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     // Configure routing to match legacy ASP.NET MVC setup
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
