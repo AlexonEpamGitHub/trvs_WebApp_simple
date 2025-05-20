@@ -1,26 +1,31 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="/wwwroot/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/wwwroot/css/site.css" rel="stylesheet" />
-    <script src="/wwwroot/js/modernizr.js"></script>
+    <title>@ViewData["Title"] - My ASP.NET Application</title>
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand">Application name</a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="About" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -33,8 +38,8 @@
         </footer>
     </div>
 
-    <script src="/wwwroot/js/jquery.min.js"></script>
-    <script src="/wwwroot/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
