@@ -1,37 +1,22 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-
-// Load settings from appsettings.json
-var runtimeSettings = builder.Configuration.GetSection("RuntimeSettings").Get<RuntimeSettings>();
-builder.Services.AddSingleton(runtimeSettings);
-
-// Configure runtime settings
-if (runtimeSettings != null)
+builder.Services.AddControllersWithViews(options =>
 {
-    if (!string.IsNullOrEmpty(runtimeSettings.TargetFramework))
-    {
-        // Log or handle target framework settings if needed
-    }
-
-    if (!string.IsNullOrEmpty(runtimeSettings.Platform))
-    {
-        // Log or handle platform settings if needed
-    }
-}
+    // Register HandleErrorAttribute as a global filter
+    options.Filters.Add(new HandleErrorAttribute());
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+    // Middleware for handling exceptions
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
@@ -45,15 +30,10 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
+    // Configure routing to match legacy ASP.NET MVC setup
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
 app.Run();
-
-public class RuntimeSettings
-{
-    public string TargetFramework { get; set; }
-    public string Platform { get; set; }
-}
