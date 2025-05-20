@@ -36,14 +36,18 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Map routes (migrated from RouteConfig.cs)
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// Endpoint routing configuration
+app.UseEndpoints(endpoints =>
+{
+    // Map default route
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Explicitly register area routes
-app.MapControllerRoute(
-    name: "areaRoute",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    // Explicitly register area routes
+    endpoints.MapControllerRoute(
+        name: "areaRoute",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();
