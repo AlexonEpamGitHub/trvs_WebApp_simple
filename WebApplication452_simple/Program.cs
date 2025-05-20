@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,38 +17,6 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
-}
-else
-{
-    // Global exception handling middleware for development environment
-    app.UseExceptionHandler(errorApp =>
-    {
-        errorApp.Run(async context =>
-        {
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            context.Response.ContentType = "text/html";
-
-            var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
-            if (exceptionHandlerFeature != null)
-            {
-                var exception = exceptionHandlerFeature.Error;
-
-                // Log the exception (use any logging framework or service)
-                // Example: logger.LogError(exception, "An unhandled exception occurred.");
-
-                // Display a simple error page or redirect to a custom error page
-                await context.Response.WriteAsync("<html><body>\r\n");
-                await context.Response.WriteAsync("We're sorry, an unexpected error occurred.<br>\r\n");
-
-                // Display exception details in development for debugging purposes
-                await context.Response.WriteAsync($"<strong>Exception: {exception.Message}</strong><br>\r\n");
-                await context.Response.WriteAsync("<pre>\r\n");
-                await context.Response.WriteAsync(exception.StackTrace);
-                await context.Response.WriteAsync("</pre>\r\n");
-                await context.Response.WriteAsync("</body></html>\r\n");
-            }
-        });
-    });
 }
 
 // Configure application lifecycle settings from Global.asax.cs
@@ -79,14 +45,30 @@ app.UseStaticFiles();
 
 app.UseAuthorization();
 
+// Define routes using MapControllerRoute and migrate legacy logic from RouteConfig.cs
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "customRoute",
+    pattern: "Custom/{controller=Custom}/{action=Action}/{id?}");
 
 app.MapAreaControllerRoute(
     name: "areas",
     areaName: "MyArea",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+// Example of additional legacy route configuration migrated from RouteConfig.cs
+app.MapControllerRoute(
+    name: "legacyRoute1",
+    pattern: "Legacy/{controller}/{action}/{year}/{month}",
+    defaults: new { controller = "Legacy", action = "Index" });
+
+app.MapControllerRoute(
+    name: "legacyRoute2",
+    pattern: "Old/{controller}/{action}/{category}/{subcategory}",
+    defaults: new { controller = "Old", action = "Details" });
 
 // Register static bundles
 // Note: ASP.NET Core does not have direct support for BundleConfig like ASP.NET MVC.
