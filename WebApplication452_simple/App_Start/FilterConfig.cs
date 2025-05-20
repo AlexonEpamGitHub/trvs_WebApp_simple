@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Mvc.Filters;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(options =>
+builder.Services.AddControllersWithViews();
+
+// Configure global filters using conventions.
+builder.Services.Configure<MvcOptions>(options =>
 {
-    options.Filters.Add(new HandleErrorAttribute());
+    options.Filters.Add<ExceptionFilterAttribute>();
 });
 
 var app = builder.Build();
