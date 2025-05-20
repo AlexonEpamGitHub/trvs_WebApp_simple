@@ -1,13 +1,20 @@
-﻿using System.Web;
 using System.Web.Mvc;
 
-namespace WebApplication452_simple
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews(options => 
 {
-    public class FilterConfig
-    {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
-            filters.Add(new HandleErrorAttribute());
-        }
-    }
-}
+    options.Filters.Add(new HandleErrorAttribute());
+});
+
+var app = builder.Build();
+
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
