@@ -1,9 +1,14 @@
 @{
     ViewData["Title"] = "About";
+    ViewData["Message"] = "Welcome to the About Page";
 }
 <main aria-labelledby="title">
-    <h2 id="title">@ViewData["Title"]</h2>
-    <h3>@ViewData["Message"]</h3>
+    <header>
+        <h1 id="title">@ViewData["Title"]</h1>
+        <p>@ViewData["Message"]</p>
+    </header>
 
-    <p>Use this area to provide additional information.</p>
+    <section>
+        <p>Use this area to provide additional information about your application or team.</p>
+    </section>
 </main>
