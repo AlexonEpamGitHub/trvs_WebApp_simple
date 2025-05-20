@@ -1,30 +1,48 @@
-﻿using System.Web;
-using System.Web.Optimization;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.FileProviders;
 
 namespace WebApplication452_simple
 {
-    public class BundleConfig
+    public class Startup
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
-        public static void RegisterBundles(BundleCollection bundles)
+        public void Configure(IApplicationBuilder app)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            // Enable static file serving from the wwwroot directory
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(System.IO.Path.Combine(System.AppContext.BaseDirectory, "wwwroot")),
+                RequestPath = ""
+            });
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
-
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
-            bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            // Additional middleware can be added here
         }
     }
 }
+
+<!-- Example usage of TagHelpers in Razor views -->
+<!-- Replace the previous bundling mechanism with direct linking to static files -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebApplication452_simple</title>
+
+    <!-- CSS files -->
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/site.css" rel="stylesheet" />
+
+    <!-- JavaScript files -->
+    <script src="/js/jquery-3.6.0.js"></script>
+    <script src="/js/jquery.validate.js"></script>
+    <script src="/js/modernizr-2.8.3.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+<body>
+    <div>
+        <!-- Content goes here -->
+    </div>
+</body>
+</html>
