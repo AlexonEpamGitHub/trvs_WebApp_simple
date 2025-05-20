@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace WebApplication452_simple.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return await Task.FromResult(View());
         }
 
-        public ActionResult About()
+        public async Task<IActionResult> About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+            return await Task.FromResult(View());
         }
 
-        public ActionResult Contact()
+        public async Task<IActionResult> Contact()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
+            return await Task.FromResult(View());
         }
     }
 }
