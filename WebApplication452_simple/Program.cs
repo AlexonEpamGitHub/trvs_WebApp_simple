@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,38 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
+}
+else
+{
+    // Global exception handling middleware for development environment
+    app.UseExceptionHandler(errorApp =>
+    {
+        errorApp.Run(async context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Response.ContentType = "text/html";
+
+            var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
+            if (exceptionHandlerFeature != null)
+            {
+                var exception = exceptionHandlerFeature.Error;
+
+                // Log the exception (use any logging framework or service)
+                // Example: logger.LogError(exception, "An unhandled exception occurred.");
+
+                // Display a simple error page or redirect to a custom error page
+                await context.Response.WriteAsync("<html><body>\r\n");
+                await context.Response.WriteAsync("We're sorry, an unexpected error occurred.<br>\r\n");
+
+                // Display exception details in development for debugging purposes
+                await context.Response.WriteAsync($"<strong>Exception: {exception.Message}</strong><br>\r\n");
+                await context.Response.WriteAsync("<pre>\r\n");
+                await context.Response.WriteAsync(exception.StackTrace);
+                await context.Response.WriteAsync("</pre>\r\n");
+                await context.Response.WriteAsync("</body></html>\r\n");
+            }
+        });
+    });
 }
 
 // Configure application lifecycle settings from Global.asax.cs
