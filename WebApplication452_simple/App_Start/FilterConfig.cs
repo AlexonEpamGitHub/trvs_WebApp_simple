@@ -1,13 +1,28 @@
-﻿using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApplication452_simple
 {
-    public class FilterConfig
+    public class Startup
     {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        public void ConfigureServices(IServiceCollection services)
         {
-            filters.Add(new HandleErrorAttribute());
+            services.AddControllersWithViews();
+        }
+        
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseExceptionHandler("/Home/Error"); // Configuring built-in exception handling middleware
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
