@@ -1,11 +1,22 @@
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.FileProviders;
+using WebOptimizer;
 
 namespace WebApplication452_simple
 {
     public class Startup
     {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Add WebOptimizer services for bundling and minification
+            services.AddWebOptimizer(pipeline =>
+            {
+                pipeline.AddCssBundle("/css/bundle.css", "/css/bootstrap.css", "/css/site.css");
+                pipeline.AddJavaScriptBundle("/js/bundle.js", "/js/jquery-3.6.0.js", "/js/jquery.validate.js", "/js/modernizr-2.8.3.js", "/js/bootstrap.js");
+            });
+        }
+
         public void Configure(IApplicationBuilder app)
         {
             // Enable static file serving from the wwwroot directory
@@ -15,13 +26,13 @@ namespace WebApplication452_simple
                 RequestPath = ""
             });
 
+            // Use WebOptimizer for handling bundles
+            app.UseWebOptimizer();
+
             // Additional middleware can be added here
         }
     }
 }
-
-<!-- Example usage of TagHelpers in Razor views -->
-<!-- Replace the previous bundling mechanism with direct linking to static files -->
 
 <!DOCTYPE html>
 <html>
@@ -30,15 +41,11 @@ namespace WebApplication452_simple
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebApplication452_simple</title>
 
-    <!-- CSS files -->
-    <link href="/css/bootstrap.css" rel="stylesheet" />
-    <link href="/css/site.css" rel="stylesheet" />
+    <!-- CSS bundle -->
+    <link href="/css/bundle.css" rel="stylesheet" />
 
-    <!-- JavaScript files -->
-    <script src="/js/jquery-3.6.0.js"></script>
-    <script src="/js/jquery.validate.js"></script>
-    <script src="/js/modernizr-2.8.3.js"></script>
-    <script src="/js/bootstrap.js"></script>
+    <!-- JavaScript bundle -->
+    <script src="/js/bundle.js"></script>
 </head>
 <body>
     <div>
