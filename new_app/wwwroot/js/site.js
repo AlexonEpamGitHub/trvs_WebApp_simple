@@ -1,5 +1,14 @@
 // JavaScript file for client-side functionality
 
+/**
+ * Sanitize user input to prevent injection attacks.
+ * @param {string} input - The user input to sanitize.
+ * @returns {string} - The sanitized input.
+ */
+function sanitizeInput(input) {
+    return input.replace(/[<>]/g, ''); // Remove potentially harmful characters
+}
+
 // Ensure DOM is fully loaded
 $(document).ready(function() {
     // Form validation
@@ -8,7 +17,8 @@ $(document).ready(function() {
 
         // Example validation: Ensure required fields are filled
         $(this).find('[required]').each(function() {
-            if ($(this).val().trim() === '') {
+            const sanitizedValue = sanitizeInput($(this).val());
+            if (sanitizedValue.trim() === '') {
                 isValid = false;
                 $(this).addClass('error');
             } else {
@@ -27,11 +37,20 @@ $(document).ready(function() {
         $.ajax({
             url: '/api/data',
             method: 'GET',
+            dataType: 'json',
             success: function(response) {
-                $('#dataContainer').html(response);
+                try {
+                    // Ensure response is sanitized before rendering
+                    const sanitizedResponse = sanitizeInput(JSON.stringify(response));
+                    $('#dataContainer').html(sanitizedResponse);
+                } catch (error) {
+                    console.error('Error processing response:', error);
+                    alert('An error occurred while processing the data.');
+                }
             },
-            error: function() {
-                alert('Failed to load data.');
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('AJAX Error:', textStatus, errorThrown);
+                alert('Failed to load data. Please try again later.');
             }
         });
     });
@@ -44,7 +63,7 @@ $(document).ready(function() {
     // Input field masking
     $('.phone-input').on('input', function() {
         let value = $(this).val().replace(/[^0-9]/g, '');
-        $(this).val(value);
+        $(this).val(sanitizeInput(value));
     });
 
     // Keyboard event handling
