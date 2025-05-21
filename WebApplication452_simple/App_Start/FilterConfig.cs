@@ -1,13 +1,16 @@
-﻿using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApplication452_simple
 {
-    public class FilterConfig
+    public static class FilterConfig
     {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        public static void RegisterGlobalFilters(IServiceCollection services)
         {
-            filters.Add(new HandleErrorAttribute());
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new HandleErrorAttribute());
+            });
         }
     }
 }
