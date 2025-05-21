@@ -1,14 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-// Add BundlerMinifier or equivalent modern bundling tool
-builder.Services.AddWebOptimizer();
 
 var app = builder.Build();
 
@@ -19,9 +15,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseExceptionHandler("/Home/Error");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseWebOptimizer(); // Use bundling and minification
 
 app.UseRouting();
 
