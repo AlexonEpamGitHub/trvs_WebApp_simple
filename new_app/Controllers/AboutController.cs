@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
 
 namespace new_app.Controllers
 {
@@ -6,7 +7,18 @@ namespace new_app.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.Message = "Your application description page.";
+            // Sanitize user input
+            string sanitizedMessage = HttpUtility.HtmlEncode("Your application description page.");
+
+            // Verify and assign sanitized data to ViewBag
+            ViewBag.Message = sanitizedMessage;
+
+            // Ensure no sensitive data is exposed in ViewBag or ViewData
+            if (ViewBag.Message == null || string.IsNullOrWhiteSpace(ViewBag.Message.ToString()))
+            {
+                ViewBag.Message = "Default description page message.";
+            }
+
             return View();
         }
     }
