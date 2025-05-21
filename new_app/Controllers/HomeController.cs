@@ -9,24 +9,54 @@ namespace NewApp.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            ViewData["Message"] = "Welcome to the Home Page!";
-            return View();
+            try
+            {
+                ViewData["Message"] = "Welcome to the Home Page!";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = "An error occurred while loading the home page.";
+                // Log the exception (assume a logging mechanism is in place)
+                // Logger.LogError(ex);
+                return View("Error");
+            }
         }
 
         // Action for the About page
         [HttpGet("about")]
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-            return View();
+            try
+            {
+                ViewData["Message"] = "Your application description page.";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = "An error occurred while loading the about page.";
+                // Log the exception (assume a logging mechanism is in place)
+                // Logger.LogError(ex);
+                return View("Error");
+            }
         }
 
         // Action for the Contact page
         [HttpGet("contact")]
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-            return View();
+            try
+            {
+                ViewData["Message"] = "Your contact page.";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = "An error occurred while loading the contact page.";
+                // Log the exception (assume a logging mechanism is in place)
+                // Logger.LogError(ex);
+                return View("Error");
+            }
         }
     }
 }
