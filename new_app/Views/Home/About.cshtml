@@ -1,0 +1,19 @@
+@model string
+
+@{
+    ViewData["Title"] = "About Us";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>@Model</p>
+
+@section Scripts {
+    <script>
+        console.log("About page loaded.");
+    </script>
+}
+
+<footer>
+    <p>Contact info: contact@example.com</p>
+    <p>&copy; 2023 Example Organization</p>
+</footer>
