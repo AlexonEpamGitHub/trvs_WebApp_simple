@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    image: new_app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000" # Expose the app on port 5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=AppDb;User=sa;Password=YourStrong!Password;
+    depends_on:
+      - db
+    volumes:
+      - ./appsettings.json:/app/appsettings.json
+      - ./appsettings.Development.json:/app/appsettings.Development.json
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1433:1433" # Expose the database on port 1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Password
+    volumes:
+      - db_data:/var/opt/mssql
+
+volumes:
+  db_data:
