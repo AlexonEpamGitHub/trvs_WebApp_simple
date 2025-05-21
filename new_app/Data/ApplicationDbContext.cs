@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using new_app.Data.Entities;
+using System.Linq;
 
 namespace new_app.Data
 {
@@ -12,6 +13,18 @@ namespace new_app.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+
+        // Example of a secure query using LINQ for Users
+        public IQueryable<User> GetUsersByName(string name)
+        {
+            return Users.Where(user => user.Name == name);
+        }
+
+        // Example of a secure query using LINQ for Contacts
+        public IQueryable<Contact> GetContactsByPhoneNumber(string phoneNumber)
+        {
+            return Contacts.Where(contact => contact.PhoneNumber == phoneNumber);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
