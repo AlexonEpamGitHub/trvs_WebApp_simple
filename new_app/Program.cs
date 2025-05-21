@@ -21,6 +21,18 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Configure secure response headers
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Remove("X-Powered-By"); // Remove unnecessary headers
+    context.Response.Headers.Remove("Server");
+    context.Response.Headers.Add("X-Content-Type-Options", "nosniff"); // Prevent MIME sniffing
+    context.Response.Headers.Add("X-Frame-Options", "DENY"); // Prevent clickjacking
+    context.Response.Headers.Add("X-XSS-Protection", "1; mode=block"); // Enable XSS protection
+    await next();
+});
+
 app.UseStaticFiles();
 
 app.UseRouting();
