@@ -1,0 +1,28 @@
+/* Old styles migrated to new layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
