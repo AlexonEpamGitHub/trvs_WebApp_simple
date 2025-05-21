@@ -1,31 +1,31 @@
 @model HomeViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = Html.Encode("Home Page");
 }
 
 <main>
     <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET Core</h1>
-        <p class="lead">ASP.NET Core is a free web framework for building modern web applications and services using .NET.</p>
+        <h1 id="title">@Html.Encode("ASP.NET Core")</h1>
+        <p class="lead">@Html.Encode("ASP.NET Core is a free web framework for building modern web applications and services using .NET.")</p>
         <p><a href="https://learn.microsoft.com/en-us/aspnet/core/" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
     </section>
 
     <div class="row">
         <section class="col-md-4" aria-labelledby="gettingStartedTitle">
             <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>ASP.NET Core offers a robust and modern platform for building scalable web applications.</p>
+            <p>@Html.Encode("ASP.NET Core offers a robust and modern platform for building scalable web applications.")</p>
             <p><a class="btn btn-outline-dark" href="https://learn.microsoft.com/en-us/aspnet/core/getting-started/">Learn more &raquo;</a></p>
         </section>
 
         <section class="col-md-4" aria-labelledby="librariesTitle">
             <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet provides access to an extensive library of packages for .NET developers.</p>
+            <p>@Html.Encode("NuGet provides access to an extensive library of packages for .NET developers.")</p>
             <p><a class="btn btn-outline-dark" href="https://www.nuget.org/">Learn more &raquo;</a></p>
         </section>
 
         <section class="col-md-4" aria-labelledby="hostingTitle">
             <h2 id="hostingTitle">Web Hosting</h2>
-            <p>Choose from a variety of hosting options tailored for ASP.NET Core applications.</p>
+            <p>@Html.Encode("Choose from a variety of hosting options tailored for ASP.NET Core applications.")</p>
             <p><a class="btn btn-outline-dark" href="https://azure.microsoft.com/en-us/">Learn more &raquo;</a></p>
         </section>
     </div>
