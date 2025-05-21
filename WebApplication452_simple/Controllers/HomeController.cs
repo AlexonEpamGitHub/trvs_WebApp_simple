@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication452_simple.Models;
 
 namespace WebApplication452_simple.Controllers
 {
@@ -13,11 +14,14 @@ namespace WebApplication452_simple.Controllers
             return await Task.FromResult(View());
         }
 
-        public async Task<IActionResult> About()
+        public IActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return await Task.FromResult(View());
+            var model = new AboutViewModel
+            {
+                Title = "About",
+                Message = "Use this area to provide additional information."
+            };
+            return View(model);
         }
 
         public async Task<IActionResult> Contact()
@@ -26,5 +30,14 @@ namespace WebApplication452_simple.Controllers
 
             return await Task.FromResult(View());
         }
+    }
+}
+
+namespace WebApplication452_simple.Models
+{
+    public class AboutViewModel
+    {
+        public string Title { get; set; }
+        public string Message { get; set; }
     }
 }
