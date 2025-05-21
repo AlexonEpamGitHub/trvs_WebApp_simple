@@ -1,20 +1,31 @@
-﻿/* Set padding to keep content from hitting the edges */
+/* Set padding to keep content from hitting the edges and ensure responsiveness */
 .body-content {
     margin-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
+    box-sizing: border-box; /* Ensure padding is included in the width and height */
+    max-width: 100%; /* Make sure the content adjusts to screen size */
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
+   Ensure responsiveness and proper alignment 
 */
 .dl-horizontal dt {
     white-space: normal;
+    font-size: 1rem; /* Modern font size for readability */
+    margin-bottom: 5px; /* Add spacing for better alignment */
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+/* Set width on the form input elements since they're 100% wide by default 
+   Ensure responsiveness and modern design compatibility 
+*/
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%; /* Adjust to screen size for responsiveness */
+    width: auto; /* Allow flexibility for alignment */
+    padding: 10px; /* Add padding for modern design standards */
+    font-size: 1rem; /* Ensure readable font size */
+    box-sizing: border-box; /* Include padding in the element's dimensions */
 }
