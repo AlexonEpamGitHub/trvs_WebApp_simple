@@ -1,19 +1,88 @@
-﻿@{
+@{
     ViewBag.Title = "Contact";
+    ViewBag.SupportEmail = ViewBag.SupportEmail ?? "Support@example.com";
+    ViewBag.MarketingEmail = ViewBag.MarketingEmail ?? "Marketing@example.com";
+    ViewBag.PhoneNumber = ViewBag.PhoneNumber ?? "425.555.0100";
+    ViewBag.AddressLine1 = ViewBag.AddressLine1 ?? "One Microsoft Way";
+    ViewBag.AddressLine2 = ViewBag.AddressLine2 ?? "Redmond, WA 98052-6399";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
+<main aria-labelledby="title" class="container mt-5">
+    <header class="mb-4">
+        <h1 id="title" class="text-primary">@ViewBag.Title</h1>
+        <p class="lead">@ViewBag.Message</p>
+    </header>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+    <section class="mb-5" aria-labelledby="contact-info-title">
+        <h2 id="contact-info-title" class="h4 text-secondary">Contact Information</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <address class="mb-3">
+                    <strong>Address:</strong><br />
+                    <p>
+                        <span>@ViewBag.AddressLine1</span><br />
+                        <span>@ViewBag.AddressLine2</span>
+                    </p>
+                </address>
+                <p>
+                    <strong>Phone:</strong> 
+                    <a href="tel:@ViewBag.PhoneNumber">@ViewBag.PhoneNumber</a>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p>
+                    <strong>Support Email:</strong> 
+                    <a href="mailto:@ViewBag.SupportEmail">@ViewBag.SupportEmail</a>
+                </p>
+                <p>
+                    <strong>Marketing Email:</strong> 
+                    <a href="mailto:@ViewBag.MarketingEmail">@ViewBag.MarketingEmail</a>
+                </p>
+            </div>
+        </div>
+    </section>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+    <section aria-labelledby="contact-form-title">
+        <h2 id="contact-form-title" class="h4 text-secondary">Get in Touch</h2>
+        <form class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your Name" required />
+                <div class="invalid-feedback">
+                    Please provide your name.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Your Email" required />
+                <div class="invalid-feedback">
+                    Please provide a valid email address.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Your Message" required></textarea>
+                <div class="invalid-feedback">
+                    Please enter your message.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
 </main>
+
+<script>
+    // Enable Bootstrap validation
+    (function () {
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
