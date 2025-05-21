@@ -25,12 +25,27 @@
         <ul>
             <li>
                 <strong>Support:</strong> 
-                <a href="mailto:Support@example.com">Support@example.com</a>
+                <span class="email-obfuscated" data-user="Support" data-domain="example.com"></span>
             </li>
             <li>
                 <strong>Marketing:</strong> 
-                <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+                <span class="email-obfuscated" data-user="Marketing" data-domain="example.com"></span>
             </li>
         </ul>
     </section>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const obfuscatedEmails = document.querySelectorAll('.email-obfuscated');
+        obfuscatedEmails.forEach(function(element) {
+            const user = element.getAttribute('data-user');
+            const domain = element.getAttribute('data-domain');
+            const email = `${user}@${domain}`;
+            const emailLink = document.createElement('a');
+            emailLink.href = `mailto:${email}`;
+            emailLink.textContent = email;
+            element.appendChild(emailLink);
+        });
+    });
+</script>
