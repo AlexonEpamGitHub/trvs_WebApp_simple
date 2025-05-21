@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - My ASP.NET Core Application</title>
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body>
@@ -34,6 +35,8 @@
     <footer class="text-center">
         <p>&copy; @DateTime.Now.Year - My ASP.NET Core Application</p>
     </footer>
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/site.js"></script>
     @RenderSection("scripts", required: false)
 </body>
