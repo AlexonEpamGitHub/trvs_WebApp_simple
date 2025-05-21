@@ -22,37 +22,44 @@
         adapters,
         data_validation = "unobtrusiveValidation";
 
+    function sanitizeInput(value) {
+        if (typeof value === "string") {
+            return value.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+        }
+        return value;
+    }
+
     function setValidationValues(options, ruleName, value) {
         options.rules[ruleName] = value;
         if (options.message) {
-            options.messages[ruleName] = options.message;
+            options.messages[ruleName] = sanitizeInput(options.message);
         }
     }
 
     function splitAndTrim(value) {
-        return value.replace(/^\s+|\s+$/g, "").split(/\s*,\s*/g);
+        return sanitizeInput(value.replace(/^\s+|\s+$/g, "").split(/\s*,\s*/g));
     }
 
     function escapeAttributeValue(value) {
         // As mentioned on http://api.jquery.com/category/selectors/
-        return value.replace(/([!"#$%&'()*+,./:;<=>?@\[\\\]^`{|}~])/g, "\\$1");
+        return sanitizeInput(value.replace(/([!"#$%&'()*+,./:;<=>?@\[\\\]^`{|}~])/g, "\\$1"));
     }
 
     function getModelPrefix(fieldName) {
-        return fieldName.substr(0, fieldName.lastIndexOf(".") + 1);
+        return sanitizeInput(fieldName.substr(0, fieldName.lastIndexOf(".") + 1));
     }
 
     function appendModelPrefix(value, prefix) {
         if (value.indexOf("*.") === 0) {
             value = value.replace("*.", prefix);
         }
-        return value;
+        return sanitizeInput(value);
     }
 
     function onError(error, inputElement) {  // 'this' is the form element
         var container = $(this).find("[data-valmsg-for='" + escapeAttributeValue(inputElement[0].name) + "']"),
             replaceAttrValue = container.attr("data-valmsg-replace"),
-            replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) !== false : null;
+            replace = replaceAttrValue ? $.parseJSON(sanitizeInput(replaceAttrValue)) !== false : null;
 
         container.removeClass("field-validation-valid").addClass("field-validation-error");
         error.data("unobtrusiveContainer", container);
@@ -75,7 +82,7 @@
             container.addClass("validation-summary-errors").removeClass("validation-summary-valid");
 
             $.each(validator.errorList, function () {
-                $("<li />").html(this.message).appendTo(list);
+                $("<li />").html(sanitizeInput(this.message)).appendTo(list);
             });
         }
     }
@@ -85,7 +92,7 @@
 
         if (container) {
             var replaceAttrValue = container.attr("data-valmsg-replace"),
-                replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) : null;
+                replace = replaceAttrValue ? $.parseJSON(sanitizeInput(replaceAttrValue)) : null;
 
             container.addClass("field-validation-valid").removeClass("field-validation-error");
             error.removeData("unobtrusiveContainer");
@@ -134,8 +141,8 @@
         if (!result) {
             result = {
                 options: {  // options structure passed to jQuery Validate's validate() method
-                    errorClass: defaultOptions.errorClass || "input-validation-error",
-                    errorElement: defaultOptions.errorElement || "span",
+                    errorClass: sanitizeInput(defaultOptions.errorClass || "input-validation-error"),
+                    errorElement: sanitizeInput(defaultOptions.errorElement || "span"),
                     errorPlacement: function () {
                         onError.apply(form, arguments);
                         execInContext("errorPlacement", arguments);
@@ -193,15 +200,15 @@
             valInfo.options.messages[element.name] = messages = {};
 
             $.each(this.adapters, function () {
-                var prefix = "data-val-" + this.name,
-                    message = $element.attr(prefix),
+                var prefix = "data-val-" + sanitizeInput(this.name),
+                    message = sanitizeInput($element.attr(prefix)),
                     paramValues = {};
 
                 if (message !== undefined) {  // Compare against undefined, because an empty message is legal (and falsy)
                     prefix += "-";
 
                     $.each(this.params, function () {
-                        paramValues[this] = $element.attr(prefix + this);
+                        paramValues[this] = sanitizeInput($element.attr(prefix + this));
                     });
 
                     this.adapt({
@@ -268,7 +275,7 @@
             fn = params;
             params = [];
         }
-        this.push({ name: adapterName, params: params, adapt: fn });
+        this.push({ name: sanitizeInput(adapterName), params: params, adapt: fn });
         return this;
     };
 
@@ -281,7 +288,7 @@
         /// of adapterName will be used instead.</param>
         /// <returns type="jQuery.validator.unobtrusive.adapters" />
         return this.add(adapterName, function (options) {
-            setValidationValues(options, ruleName || adapterName, true);
+            setValidationValues(options, sanitizeInput(ruleName || adapterName), true);
         });
     };
 
@@ -303,17 +310,17 @@
         /// contains the maximum value. The default is "max".</param>
         /// <returns type="jQuery.validator.unobtrusive.adapters" />
         return this.add(adapterName, [minAttribute || "min", maxAttribute || "max"], function (options) {
-            var min = options.params.min,
-                max = options.params.max;
+            var min = sanitizeInput(options.params.min),
+                max = sanitizeInput(options.params.max);
 
             if (min && max) {
-                setValidationValues(options, minMaxRuleName, [min, max]);
+                setValidationValues(options, sanitizeInput(minMaxRuleName), [min, max]);
             }
             else if (min) {
-                setValidationValues(options, minRuleName, min);
+                setValidationValues(options, sanitizeInput(minRuleName), min);
             }
             else if (max) {
-                setValidationValues(options, maxRuleName, max);
+                setValidationValues(options, sanitizeInput(maxRuleName), max);
             }
         });
     };
@@ -328,8 +335,8 @@
         /// <param name="ruleName" type="String" optional="true">[Optional] The name of the jQuery Validate rule. If not provided, the value
         /// of adapterName will be used instead.</param>
         /// <returns type="jQuery.validator.unobtrusive.adapters" />
-        return this.add(adapterName, [attribute || "val"], function (options) {
-            setValidationValues(options, ruleName || adapterName, options.params[attribute]);
+        return this.add(adapterName, [sanitizeInput(attribute || "val")], function (options) {
+            setValidationValues(options, sanitizeInput(ruleName || adapterName), sanitizeInput(options.params[attribute]));
         });
     };
 
@@ -338,19 +345,25 @@
     });
 
     $jQval.addMethod("regex", function (value, element, params) {
-        var match;
-        if (this.optional(element)) {
-            return true;
-        }
+        var sanitizedParams = sanitizeInput(params);
+        try {
+            var match;
+            if (this.optional(element)) {
+                return true;
+            }
 
-        match = new RegExp(params).exec(value);
-        return (match && (match.index === 0) && (match[0].length === value.length));
+            match = new RegExp(sanitizedParams).exec(value);
+            return (match && (match.index === 0) && (match[0].length === value.length));
+        } catch (e) {
+            console.error("Invalid regex pattern provided for validation:", sanitizedParams);
+            return false;
+        }
     });
 
     $jQval.addMethod("nonalphamin", function (value, element, nonalphamin) {
         var match;
         if (nonalphamin) {
-            match = value.match(/\W/g);
+            match = sanitizeInput(value).match(/\W/g);
             match = match && match.length >= nonalphamin;
         }
         return match;
@@ -372,7 +385,7 @@
     adapters.addMinMax("minlength", "minlength").addMinMax("maxlength", "minlength", "maxlength");
     adapters.add("equalto", ["other"], function (options) {
         var prefix = getModelPrefix(options.element.name),
-            other = options.params.other,
+            other = sanitizeInput(options.params.other),
             fullOtherName = appendModelPrefix(other, prefix),
             element = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(fullOtherName) + "']")[0];
 
@@ -386,8 +399,8 @@
     });
     adapters.add("remote", ["url", "type", "additionalfields"], function (options) {
         var value = {
-            url: options.params.url,
-            type: options.params.type || "GET",
+            url: sanitizeInput(options.params.url),
+            type: sanitizeInput(options.params.type || "GET"),
             data: {}
         },
             prefix = getModelPrefix(options.element.name);
@@ -398,12 +411,12 @@
                 var field = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(paramName) + "']");
                 // For checkboxes and radio buttons, only pick up values from checked fields.
                 if (field.is(":checkbox")) {
-                    return field.filter(":checked").val() || field.filter(":hidden").val() || '';
+                    return sanitizeInput(field.filter(":checked").val() || field.filter(":hidden").val() || '');
                 }
                 else if (field.is(":radio")) {
-                    return field.filter(":checked").val() || '';
+                    return sanitizeInput(field.filter(":checked").val() || '');
                 }
-                return field.val();
+                return sanitizeInput(field.val());
             };
         });
 
@@ -411,17 +424,17 @@
     });
     adapters.add("password", ["min", "nonalphamin", "regex"], function (options) {
         if (options.params.min) {
-            setValidationValues(options, "minlength", options.params.min);
+            setValidationValues(options, "minlength", sanitizeInput(options.params.min));
         }
         if (options.params.nonalphamin) {
-            setValidationValues(options, "nonalphamin", options.params.nonalphamin);
+            setValidationValues(options, "nonalphamin", sanitizeInput(options.params.nonalphamin));
         }
         if (options.params.regex) {
-            setValidationValues(options, "regex", options.params.regex);
+            setValidationValues(options, "regex", sanitizeInput(options.params.regex));
         }
     });
     adapters.add("fileextensions", ["extensions"], function (options) {
-        setValidationValues(options, "extension", options.params.extensions);
+        setValidationValues(options, "extension", sanitizeInput(options.params.extensions));
     });
 
     $(function () {
