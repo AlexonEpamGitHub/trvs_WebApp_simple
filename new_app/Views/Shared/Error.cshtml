@@ -8,6 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+    <meta name="environment" content="@ViewData["Environment"]" />
     <link rel="stylesheet" href="/wwwroot/css/site.css" />
     <link rel="stylesheet" href="/wwwroot/lib/bootstrap/bootstrap.min.css" />
 </head>
@@ -15,7 +16,14 @@
     <div class="container text-center">
         <h1 class="text-danger">Error</h1>
         <h2>An error occurred while processing your request.</h2>
-        <p>@ViewData["ErrorMessage"]</p>
+        @if (ViewData["Environment"]?.ToString() == "Development")
+        {
+            <p>@ViewData["ErrorMessage"]</p>
+        }
+        else
+        {
+            <p>Something went wrong. Please try again later.</p>
+        }
         <a href="/" class="btn btn-primary">Return to Home</a>
     </div>
     <script src="/wwwroot/lib/jquery/jquery.min.js"></script>
