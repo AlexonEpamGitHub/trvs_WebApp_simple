@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 
 namespace new_app
 {
@@ -17,14 +19,25 @@ namespace new_app
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiForgeryTokenAttribute());
+            });
+            services.AddRazorPages().AddRazorRuntimeCompilation();
 
             // Add Entity Framework Core DbContext
             services.AddDbContext<ApplicationDbContext>();
 
             // Add Dependency Injection for Custom Services
             services.AddScoped<IMyService, MyServiceImplementation>();
+
+            // Configure HSTS (HTTP Strict Transport Security)
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(365);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,6 +54,13 @@ namespace new_app
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            // Add middleware for Content Security Policy (CSP)
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';");
+                await next();
+            });
 
             app.UseRouting();
 
