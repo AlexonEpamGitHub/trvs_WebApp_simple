@@ -1,4 +1,41 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 namespace WebApplication452_simple
 {
-    // Removed bundling logic as it is replaced by static file serving in ASP.NET Core.
+    public class Startup
+    {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Add services if needed.
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
+            // Configure static file serving with default options
+            app.UseStaticFiles();
+
+            // Configure routing
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+    }
 }
