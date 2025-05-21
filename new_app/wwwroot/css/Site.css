@@ -1,28 +1,49 @@
-/* Old styles migrated to new layout */
+/* Updated styles aligned with modern responsive design principles and Bootstrap compatibility */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f8f9fa; /* Bootstrap default background color for body */
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #007bff; /* Bootstrap primary color */
     color: white;
-    padding: 10px 20px;
+    padding: 15px;
     text-align: center;
+    font-size: 1.5rem; /* Modern responsive font size */
 }
 
 footer {
-    background-color: #f1f1f1;
-    color: #333;
-    padding: 10px 20px;
+    background-color: #f8f9fa; /* Consistent with Bootstrap body background */
+    color: #6c757d; /* Bootstrap muted text color */
+    padding: 15px;
     text-align: center;
+    font-size: 0.9rem; /* Modern responsive font size */
 }
 
 .container {
-    margin: 20px;
+    margin: 20px auto; /* Center horizontally */
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    border: 1px solid #dee2e6; /* Bootstrap border color */
+    border-radius: 0.25rem; /* Bootstrap border radius */
+    background-color: #ffffff; /* White background for container */
+    max-width: 1200px; /* Limit container width for responsiveness */
+}
+
+@media (max-width: 768px) {
+    header {
+        font-size: 1.25rem; /* Adjust font size for smaller screens */
+        padding: 10px;
+    }
+
+    footer {
+        font-size: 0.8rem; /* Adjust font size for smaller screens */
+        padding: 10px;
+    }
+
+    .container {
+        margin: 10px auto; /* Reduce margin for smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
 }
