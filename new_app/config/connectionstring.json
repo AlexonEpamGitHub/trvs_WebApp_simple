@@ -1,0 +1,14 @@
+{
+  // Connection strings configuration file.
+  // The connection string below is now configured to reference a secret manager (e.g., Azure Key Vault).
+  // Developers should ensure that the application is properly set up to retrieve secrets securely.
+  // To configure Azure Key Vault:
+  // 1. Set up Azure Key Vault and add the connection string as a secret.
+  // 2. Grant access to the application using Azure Managed Identity or a Service Principal.
+  // 3. Update the application code to retrieve the secret using Azure SDK or relevant libraries.
+  // 4. Ensure proper permissions and security measures are in place.
+
+  "ConnectionStrings": {
+    "DefaultConnection": "@Secret:ConnectionString:DefaultConnection"
+  }
+}
