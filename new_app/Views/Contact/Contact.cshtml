@@ -11,14 +11,47 @@
 
     <h3>@ViewData["Message"]</h3>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr> 425.555.0100
-    </address>
+    <form asp-action="SubmitContactForm" method="post">
+        <address>
+            One Microsoft Way<br />
+            Redmond, WA 98052-6399<br />
+            <abbr title="Phone">P:</abbr>
+            <input type="tel" name="PhoneNumber" id="PhoneNumber" required pattern="\d{10}" title="Please enter a valid 10-digit phone number" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </address>
 
-    <address>
-        <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+        <address>
+            <strong>Support:</strong> 
+            <input type="email" name="SupportEmail" id="SupportEmail" required />
+            <span asp-validation-for="SupportEmail" class="text-danger"></span><br />
+            
+            <strong>Marketing:</strong> 
+            <input type="email" name="MarketingEmail" id="MarketingEmail" required />
+            <span asp-validation-for="MarketingEmail" class="text-danger"></span>
+        </address>
+
+        <button type="submit">Submit</button>
+    </form>
 </main>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-unobtrusive/3.2.13/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@using System.ComponentModel.DataAnnotations
+
+public class ContactFormModel
+{
+    [Required(ErrorMessage = "Phone number is required.")]
+    [RegularExpression(@"\d{10}", ErrorMessage = "Please enter a valid 10-digit phone number.")]
+    public string PhoneNumber { get; set; }
+
+    [Required(ErrorMessage = "Support email is required.")]
+    [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
+    public string SupportEmail { get; set; }
+
+    [Required(ErrorMessage = "Marketing email is required.")]
+    [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
+    public string MarketingEmail { get; set; }
+}
