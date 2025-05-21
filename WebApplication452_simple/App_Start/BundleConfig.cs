@@ -47,8 +47,11 @@ namespace WebApplication452_simple
     }
 
     // Note to developers:
-    // Bundling and minification of assets like JavaScript and CSS should be handled using modern tools
-    // such as Webpack, Gulp, or similar. These tools provide better performance and flexibility.
+    // Legacy bundling and minification logic has been removed. 
+    // Instead of relying on outdated ASP.NET Web Optimization dependencies, developers are encouraged to use modern tools
+    // such as Webpack, Gulp, or similar for handling bundling and minification of assets like JavaScript and CSS.
+    // These tools provide better performance, flexibility, and are more suitable for modern web development practices.
+    // To set up these tools, refer to their respective documentation and integrate them into your build process.
     // Place your static files in the "wwwroot" folder, which is the default location for serving static files in .NET Core.
-    // Refer to the official documentation for guidance on using these tools effectively.
+    // Refer to the official .NET documentation for further guidance on managing static assets effectively.
 }
