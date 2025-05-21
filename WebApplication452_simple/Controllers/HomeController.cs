@@ -1,29 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace WebApplication452_simple.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
         {
+            _logger = logger;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            _logger.LogInformation("Index action invoked.");
+            await Task.CompletedTask; // Simulate asynchronous work if needed
             return View();
         }
 
-        public ActionResult About()
+        public async Task<IActionResult> About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            _logger.LogInformation("About action invoked.");
+            ViewData["Message"] = "Your application description page.";
+            await Task.CompletedTask; // Simulate asynchronous work if needed
             return View();
         }
 
-        public ActionResult Contact()
+        public async Task<IActionResult> Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            _logger.LogInformation("Contact action invoked.");
+            ViewData["Message"] = "Your contact page.";
+            await Task.CompletedTask; // Simulate asynchronous work if needed
             return View();
         }
     }
