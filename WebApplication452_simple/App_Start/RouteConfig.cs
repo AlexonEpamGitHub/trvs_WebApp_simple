@@ -12,17 +12,16 @@ namespace WebApplication452_simple
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+                name: "Otel",
+                url: "otel/{id}",
+                defaults: new { controller = "Hotels", action = "Details" }
+            );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Dummy",
-                url: "Hotels/{action}/{id}",
-                defaults: new { controller = "Hotels", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
