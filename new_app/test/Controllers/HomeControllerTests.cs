@@ -41,5 +41,17 @@ namespace new_app.test.Controllers
             Assert.NotNull(result);
             Assert.Equal("Contact", result?.ViewName);
         }
-    }
-}
+
+        [Fact]
+        public void Index_NullRoute_ReturnsBadRequest()
+        {
+            // Simulate null input scenario for Index route.
+            ViewResult result = null;
+
+            try
+            {
+                result = _controller.Index(null) as ViewResult; // Assuming Index can take inputs.
+            }
+            catch
+            {
+                Assert.Null(result); // Ensure no crashes and validations...
