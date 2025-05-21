@@ -8,18 +8,21 @@ namespace NewApp.Data.Entities
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [StringLength(100, MinimumLength = 2)]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Name can only contain letters and spaces.")]
         public string Name { get; set; }
 
         [Required]
         [EmailAddress]
-        [MaxLength(255)]
+        [StringLength(255)]
         public string Email { get; set; }
 
         [Phone]
+        [RegularExpression(@"^\+?[1-9]\d{1,14}$", ErrorMessage = "Phone number must be a valid international format.")]
         public string PhoneNumber { get; set; }
 
-        [MaxLength(500)]
+        [StringLength(500, MinimumLength = 10)]
+        [RegularExpression(@"^[a-zA-Z0-9\s.,!?]+$", ErrorMessage = "Message can only contain letters, numbers, spaces, and basic punctuation.")]
         public string Message { get; set; }
     }
 }
