@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">An error occurred</h1>
+<p class="text-muted">Sorry, something went wrong. Please try again later or contact support if the issue persists.</p>
+
+@if (ViewData.ContainsKey("RequestId") && !string.IsNullOrEmpty(ViewData["RequestId"]?.ToString()))
+{
+    <p>
+        <strong>Request ID:</strong> @ViewData["RequestId"]
+    </p>
+}
+
+<a href="/" class="btn btn-primary">Return to Homepage</a>
