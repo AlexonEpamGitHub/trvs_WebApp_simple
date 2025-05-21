@@ -1,13 +1,27 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+    <header>
+        <h1>Error</h1>
+    </header>
+    <main>
+        <section>
+            <h2>An error occurred while processing your request.</h2>
+            @if (ViewData["ErrorMessage"] != null)
+            {
+                <p>@ViewData["ErrorMessage"]</p>
+            }
+            else
+            {
+                <p>Please try again later or contact support if the problem persists.</p>
+            }
+        </section>
+    </main>
 </body>
 </html>
