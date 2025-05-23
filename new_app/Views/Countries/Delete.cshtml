@@ -1,0 +1,12 @@
+@model Country
+
+<h2>Confirm deletion</h2>
+<h4>Are you sure you want to delete @Model.Name?</h4>
+
+<div>
+    <form asp-action="DeletePost" asp-controller="Countries" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" asp-controller="Countries" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
