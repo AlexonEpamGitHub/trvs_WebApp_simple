@@ -1,0 +1,10 @@
+// Custom extraction logic using LINQ for filtering UX data. 
+using System.Linq;
+
+public static class CustomExtract
+{
+    public static void PerformExtraction()
+    {
+        // LINQ logic for filtering and extracting UX users
+    }
+}
