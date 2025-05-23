@@ -1,30 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication452_simple.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+            var model = new IndexViewModel();
+            return View(model);
         }
 
-        public ActionResult About()
+        public IActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var model = new AboutViewModel
+            {
+                Message = "Your application description page."
+            };
+            return View(model);
         }
 
-        public ActionResult Contact()
+        public IActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var model = new ContactViewModel
+            {
+                Message = "Your contact page."
+            };
+            return View(model);
         }
+    }
+
+    public class IndexViewModel
+    {
+        // Add any properties needed for the Index view
+    }
+
+    public class AboutViewModel
+    {
+        public string Message { get; set; }
+    }
+
+    public class ContactViewModel
+    {
+        public string Message { get; set; }
     }
 }
