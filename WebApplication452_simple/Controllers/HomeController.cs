@@ -17,6 +17,7 @@ namespace WebApplication452_simple.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            // Placeholder for new logic based on clarified requirements
             _logger.LogInformation("Accessed Index page.");
             return View();
         }
