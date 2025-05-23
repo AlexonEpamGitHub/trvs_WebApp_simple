@@ -1,0 +1,28 @@
+@model HotelViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Model.Name - Details</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>@Model.Name</h1>
+        <p class="lead">Location: @Model.Location</p>
+        <p>Rating: @Model.Rating</p>
+        @if(Model.Amenities != null)
+        {
+            <h3>Hotel Amenities:</h3>
+            <ul>
+                @foreach (var amenity in Model.Amenities)
+                {
+                    <li>@amenity</li>
+                }
+            </ul>
+        }
+        <a asp-action="Index" asp-controller="Hotels" class="btn btn-primary">Back to Hotels List</a>
+    </div>
+
+</body>
+</html>

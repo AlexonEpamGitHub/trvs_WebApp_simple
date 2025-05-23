@@ -1,0 +1,19 @@
+# Ignore build directories and files
+bin/
+obj/
+.vs/
+
+# Ignore environment-specific files
+appsettings.Development.json
+.env
+
+# Ignore IDE-specific files
+.vscode/
+*.user
+
+# Ignore temporary files and logs
+*.swp
+logs/
+
+# Ignore dependencies
+node_modules/

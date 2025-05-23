@@ -1,0 +1,13 @@
+@model Country
+
+<h1>Country Details</h1>
+
+<div>
+    <h2>@Model.Name</h2>
+    <p><strong>Population:</strong> @Model.Population</p>
+    <p><strong>Region:</strong> @Model.Region</p>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to Countries</a>
+</div>

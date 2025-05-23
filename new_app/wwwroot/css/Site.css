@@ -1,0 +1,68 @@
+/* Custom styles for maintaining application's unique appearance */
+
+/* Theme Colors */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --accent-color: #17a2b8;
+    --background-color: #f8f9fa;
+    --text-color: #343a40;
+}
+
+/* Global Typography */
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+}
+.navbar a:hover {
+    color: var(--accent-color);
+}
+
+/* Cards */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    background: white;
+}
+
+/* Buttons */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: var(--accent-color);
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        text-align: center;
+    }
+    .card {
+        margin: 5px;
+    }
+}
