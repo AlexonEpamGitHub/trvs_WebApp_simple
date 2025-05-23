@@ -8,7 +8,12 @@ namespace new_app.Controllers
         public IActionResult Index()
         {
             ViewData["Title"] = "Home Page";
-            return View();
+            var result = View();
+            if (result == null)
+            {
+                return NotFound("View for 'Index' was not found.");
+            }
+            return result;
         }
 
         // Action method for the about page
@@ -16,7 +21,12 @@ namespace new_app.Controllers
         {
             ViewData["Title"] = "About Us";
             ViewData["Message"] = "Your application description page.";
-            return View();
+            var result = View();
+            if (result == null)
+            {
+                return NotFound("View for 'About' was not found.");
+            }
+            return result;
         }
 
         // Action method for the contact page
@@ -24,7 +34,12 @@ namespace new_app.Controllers
         {
             ViewData["Title"] = "Contact Us";
             ViewData["Message"] = "Your contact page.";
-            return View();
+            var result = View();
+            if (result == null)
+            {
+                return NotFound("View for 'Contact' was not found.");
+            }
+            return result;
         }
     }
 }
