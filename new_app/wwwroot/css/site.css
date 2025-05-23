@@ -1,0 +1,41 @@
+/* You can use this file to define your main site's styles */
+
+body {
+    font-family: 'Arial, sans-serif';
+    margin: 0;
+    padding: 0;
+}
+
+/* Add custom theme colors */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --accent-color: #28a745;
+}
+
+/* Default styling for body elements */
+body {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+/* Custom button styles */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        font-size: 85%;
+    }
+}
