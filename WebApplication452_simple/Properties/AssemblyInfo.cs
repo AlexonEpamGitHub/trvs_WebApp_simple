@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -6,18 +7,20 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("WebApplication452_simple")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A simple web application demonstrating modern development practices.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("WebApplication Inc.")]
 [assembly: AssemblyProduct("WebApplication452_simple")]
-[assembly: AssemblyCopyright("Copyright ©  2025")]
+[assembly: AssemblyCopyright("Copyright © WebApplication Inc. 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
-// to COM components.  If you need to access a type in this assembly from
-// COM, set the ComVisible attribute to true on that type.
+// to COM components. Set it to true only on types that need to be accessed by COM.
 [assembly: ComVisible(false)]
+
+// Ensuring cybersecurity compliance by enabling CLS compliance
+[assembly: CLSCompliant(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("76761fed-b265-41da-8957-53f0fd3aabad")]
@@ -29,7 +32,6 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Revision and Build Numbers
-// by using the '*' as shown below:
+// Following semantic versioning practices for consistent versioning.
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
