@@ -27,12 +27,9 @@ app.UseStaticFiles();
 // Middleware for routing
 app.UseRouting();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // Application is running
 app.MapGet("/", (ILogger<Program> logger) =>
