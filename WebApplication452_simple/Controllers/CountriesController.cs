@@ -1,105 +1,101 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication452_simple.Models;
+using System.Linq;
 
 namespace WebApplication452_simple.Controllers
 {
     public class CountriesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db;
+
+        public CountriesController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
 
         // GET: Countries
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View(db.Countries.ToList());
+            return View(_db.Countries.ToList());
         }
 
         // GET: Countries/Details/5
-        public ActionResult Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return StatusCode(400); // BadRequest
             }
-            Country country = db.Countries.Find(id);
+            var country = _db.Countries.Find(id);
             if (country == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             return View(country);
         }
 
         // GET: Countries/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
 
         // POST: Countries/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Country country)
+        public IActionResult Create([Bind("Id,Name")] Country country)
         {
             if (ModelState.IsValid)
             {
-                db.Countries.Add(country);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                _db.Countries.Add(country);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
 
             return View(country);
         }
 
         // GET: Countries/Edit/5
-        public ActionResult Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return StatusCode(400); // BadRequest
             }
-            Country country = db.Countries.Find(id);
+            var country = _db.Countries.Find(id);
             if (country == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             return View(country);
         }
 
         // POST: Countries/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Country country)
+        public IActionResult Edit([Bind("Id,Name")] Country country)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(country).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                _db.Entry(country).State = EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
             return View(country);
         }
 
         // GET: Countries/Delete/5
-        public ActionResult Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return StatusCode(400); // BadRequest
             }
-            Country country = db.Countries.Find(id);
+            var country = _db.Countries.Find(id);
             if (country == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             return View(country);
         }
@@ -107,21 +103,15 @@ namespace WebApplication452_simple.Controllers
         // POST: Countries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            Country country = db.Countries.Find(id);
-            db.Countries.Remove(country);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            var country = _db.Countries.Find(id);
+            if (country != null)
             {
-                db.Dispose();
+                _db.Countries.Remove(country);
+                _db.SaveChanges();
             }
-            base.Dispose(disposing);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
