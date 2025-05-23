@@ -1,13 +1,12 @@
-﻿using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace WebApplication452_simple
 {
     public class FilterConfig
     {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        public static void RegisterGlobalFilters(FilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            // No filters are added by default. This method is reserved for future usage.
         }
     }
 }
