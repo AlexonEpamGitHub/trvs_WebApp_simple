@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,7 +17,8 @@ namespace WebApplication452_simple.Controllers
         // GET: Countries
         public ActionResult Index()
         {
-            return View(db.Countries.ToList());
+            var countries = db.Countries.ToList();
+            return View(countries);
         }
 
         // GET: Countries/Details/5
@@ -42,8 +43,6 @@ namespace WebApplication452_simple.Controllers
         }
 
         // POST: Countries/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Country country)
@@ -74,8 +73,6 @@ namespace WebApplication452_simple.Controllers
         }
 
         // POST: Countries/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Country country)
@@ -110,9 +107,43 @@ namespace WebApplication452_simple.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Country country = db.Countries.Find(id);
-            db.Countries.Remove(country);
-            db.SaveChanges();
+            if (country != null)
+            {
+                db.Countries.Remove(country);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
+        }
+
+        // GET: Countries/Search
+        public ActionResult Search(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return View(new List<Country>());
+            }
+
+            var countries = db.Countries
+                .Where(c => c.Name.Contains(searchTerm))
+                .ToList();
+
+            return View(countries);
+        }
+
+        // GET: Countries/ListPaged
+        public ActionResult ListPaged(int page = 1, int pageSize = 10)
+        {
+            var countries = db.Countries
+                .OrderBy(c => c.Name)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalCount = db.Countries.Count();
+
+            return View(countries);
         }
 
         protected override void Dispose(bool disposing)

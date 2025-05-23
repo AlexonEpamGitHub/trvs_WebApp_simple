@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error</h1>
+<h4 class="text-danger">Something went wrong.</h4>
+<p>
+    We're sorry for the inconvenience. Please use the navigation above to find your way.
+</p>
+
+@if (ViewData["RequestId"] != null)
+{
+    <div>
+        <p><strong>Incident ID:</strong> @Html.Encode(ViewData["RequestId"])</p>
+    </div>
+}
+
+<a class="btn btn-primary" href="/">Return to Home</a>
