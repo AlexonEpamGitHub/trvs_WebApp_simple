@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Hotels";
+}
+
+<h1>Hotels List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Rating</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var hotel in Model)
+            {
+                <tr>
+                    <td>@hotel.Name</td>
+                    <td>@hotel.Location</td>
+                    <td>@hotel.Rating</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@hotel.Id" class="btn btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@hotel.Id" class="btn btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@hotel.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No hotels available.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Hotel</a>
+</p>
