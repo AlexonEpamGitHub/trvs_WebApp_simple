@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication452_simple.Models
 {
@@ -9,9 +9,16 @@ namespace WebApplication452_simple.Models
         public DbSet<Country> Countries { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        public ApplicationDbContext()
-            : base("DefaultConnection")
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Add any custom configurations or mappings here if needed
         }
     }
 }
