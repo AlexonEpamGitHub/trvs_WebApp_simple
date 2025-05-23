@@ -1,66 +1,82 @@
-﻿@model WebApplication452_simple.Models.Hotel
+@model WebApplication452_simple.Models.Hotel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Hotel Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container mt-5">
+    <h2 class="text-primary">Hotel Details</h2>
+    <div class="card bg-light shadow-sm mt-4">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold text-uppercase text-secondary">
+                    @Html.DisplayNameFor(model => model.Country.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Country.Name)
+                </dd>
 
-<div>
-    <h4>Hotel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </dt>
+                <dt class="col-sm-3 font-weight-bold text-uppercase text-secondary">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
+                <dt class="col-sm-3 font-weight-bold text-uppercase text-secondary">
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.City)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                <dt class="col-sm-3 font-weight-bold text-uppercase text-secondary">
+                    @Html.DisplayNameFor(model => model.Stars)
+                </dt>
+                <dd class="col-sm-9">
+                    <span class="text-warning">
+                        @for (int i = 0; i < Model.Stars; i++)
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                    </span>
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                <dt class="col-sm-3 font-weight-bold text-uppercase text-secondary">
+                    @Html.DisplayNameFor(model => model.PricePerNight)
+                </dt>
+                <dd class="col-sm-9">
+                    <span class="badge badge-info">@Html.DisplayFor(model => model.PricePerNight) $/night</span>
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
+                <dt class="col-sm-3 font-weight-bold text-uppercase text-secondary">
+                    @Html.DisplayNameFor(model => model.IsAllInclusive)
+                </dt>
+                <dd class="col-sm-9">
+                    @if (Model.IsAllInclusive)
+                    {
+                        <span class="badge badge-success">All-Inclusive</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-secondary">Not All-Inclusive</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stars)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stars)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PricePerNight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PricePerNight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAllInclusive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsAllInclusive)
-        </dd>
-
-    </dl>
+    <div class="mt-4">
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">
+            <i class="fa fa-edit"></i> Edit
+        </a>
+        <a class="btn btn-secondary" asp-action="Index">
+            <i class="fa fa-list"></i> Back to List
+        </a>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}
