@@ -1,0 +1,28 @@
+@model Country
+
+@{
+    ViewData["Title"] = "Edit Country";
+}
+
+<h2>Edit Country</h2>
+
+<form asp-action="Edit" asp-controller="Countries" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Code, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a asp-action="Index" asp-controller="Countries" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
