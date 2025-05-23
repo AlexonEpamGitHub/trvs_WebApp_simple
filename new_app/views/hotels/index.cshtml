@@ -1,0 +1,43 @@
+@model IEnumerable<Hotel>
+
+@{
+    ViewData["Title"] = "Hotel List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Hotel</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Country Name</th>
+            <th>Hotel Name</th>
+            <th>City</th>
+            <th>Stars</th>
+            <th>Price Per Night</th>
+            <th>Is All Inclusive</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hotel in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => hotel.Country.Name)</td>
+                <td>@Html.DisplayFor(model => hotel.Name)</td>
+                <td>@Html.DisplayFor(model => hotel.City)</td>
+                <td>@Html.DisplayFor(model => hotel.Stars)</td>
+                <td>@Html.DisplayFor(model => hotel.PricePerNight)</td>
+                <td>@Html.DisplayFor(model => hotel.IsAllInclusive)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@hotel.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@hotel.Id" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@hotel.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
