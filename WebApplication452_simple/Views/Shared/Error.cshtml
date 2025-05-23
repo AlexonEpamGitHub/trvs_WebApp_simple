@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -9,5 +9,25 @@
         <h1>Error.</h1>
         <h2>An error occurred while processing your request.</h2>
     </hgroup>
+
+    @section Scripts {
+        <script>
+            // Display an alert as an example of a script specifically for the error page
+            alert('Error Page');
+            
+            // Function to handle displaying of custom messages, verified for usage in templates if necessary
+            function displayCustomMessage(message) {
+                if (typeof message === 'string' && message.trim() !== '') {
+                    console.log('Custom Message:', message);
+                    // Additional logic for displaying messages can be added here
+                } else {
+                    console.warn('Invalid or empty custom message provided.');
+                }
+            }
+
+            // Example usage
+            displayCustomMessage('Displaying a custom error message.');
+        </script>
+    }
 </body>
 </html>
