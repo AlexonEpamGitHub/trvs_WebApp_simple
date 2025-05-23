@@ -1,63 +1,52 @@
-﻿@model IEnumerable<WebApplication452_simple.Models.Hotel>
+@model IEnumerable<WebApplication452_simple.Models.Hotel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Hotel Listings</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stars)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PricePerNight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsAllInclusive)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stars)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PricePerNight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAllInclusive)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Country</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Stars</th>
+            <th>Price Per Night</th>
+            <th>All Inclusive</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Country?.Name ?? "N/A"</td>
+                    <td>@item.Name ?? "N/A"</td>
+                    <td>@item.City ?? "N/A"</td>
+                    <td>@item.Stars?.ToString() ?? "N/A"</td>
+                    <td>@item.PricePerNight?.ToString("C") ?? "N/A"</td>
+                    <td>@(item.IsAllInclusive.HasValue && item.IsAllInclusive.Value ? "Yes" : "No")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">No hotels available.</td>
+            </tr>
+        }
+    </tbody>
 </table>
