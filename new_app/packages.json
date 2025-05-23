@@ -1,0 +1,14 @@
+{
+  "frameworks": {
+    "net8.0": {
+      "dependencies": {
+        "Microsoft.AspNetCore.Mvc": "8.0.*",
+        "Microsoft.AspNetCore.Http": "8.0.*"
+      }
+    }
+  },
+  "runtimes": {
+    "win-x64": {},
+    "linux-x64": {}
+  }
+}
