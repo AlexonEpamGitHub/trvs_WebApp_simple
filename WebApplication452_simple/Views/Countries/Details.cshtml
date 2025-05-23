@@ -1,26 +1,36 @@
-﻿@model WebApplication452_simple.Models.Country
+@model WebApplication452_simple.Models.Country
 
 @{
-    ViewBag.Title = "Details";
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2 class="text-primary">Country Details</h2>
 
-<div>
-    <h4>Country</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+<div class="card mt-4 shadow-sm">
+    <div class="card-body">
+        <h4 class="card-title">Country Information</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+        <i class="fas fa-edit"></i> Edit
+    </a>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-list"></i> Back to List
+    </a>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha512-Fo3rlrZj/k7ujTnHq6zQcqKKq5WsiaRfZYF5X0+f4vRF92AcjKn5Un1FXads3HSWDKLpm5GszPYWevS2C8GcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+}
