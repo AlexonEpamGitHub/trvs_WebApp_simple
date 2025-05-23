@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApplication452_simple.Models
 {
@@ -9,9 +10,23 @@ namespace WebApplication452_simple.Models
         public DbSet<Country> Countries { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        public ApplicationDbContext()
-            : base("DefaultConnection")
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var configuration = new ConfigurationBuilder()
+                    .SetBasePath(AppContext.BaseDirectory)
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
         }
     }
 }
