@@ -1,0 +1,35 @@
+@model IEnumerable<MyApp.Models.Country>
+@{
+    ViewData["Title"] = "Country Index";
+}
+
+<h1>Countries</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Country</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Population</th>
+            <th>Region</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>@country.Name</td>
+                <td>@country.Population</td>
+                <td>@country.Region</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@country.Id" class="btn btn-secondary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@country.Id" class="btn btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@country.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
