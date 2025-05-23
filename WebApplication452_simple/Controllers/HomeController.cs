@@ -5,7 +5,7 @@ namespace WebApplication452_simple.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -19,23 +19,23 @@ namespace WebApplication452_simple.Controllers
         {
             // Placeholder for new logic based on clarified requirements
             _logger.LogInformation("Accessed Index page.");
-            return View();
+            return Ok(); // Ensuring compatibility with IActionResult return type
         }
 
         [HttpGet("About")]
         public IActionResult About()
         {
             _logger.LogInformation("Accessed About page.");
-            ViewBag.Message = "Your application description page.";
-            return View();
+            var message = new { Message = "Your application description page." };
+            return Ok(message); // Updated to ensure compatibility and best practice
         }
 
         [HttpGet("Contact")]
         public IActionResult Contact()
         {
             _logger.LogInformation("Accessed Contact page.");
-            ViewBag.Message = "Your contact page.";
-            return View();
+            var message = new { Message = "Your contact page." };
+            return Ok(message); // Updated to ensure compatibility and best practice
         }
     }
 }
