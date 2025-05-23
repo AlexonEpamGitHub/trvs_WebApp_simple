@@ -15,14 +15,18 @@ namespace WebApplication452_simple.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            // Assign a static string to ViewBag.Message.
+            // Ensure that the corresponding View properly encodes this content when rendered.
+            ViewBag.Message = HttpUtility.HtmlEncode("Your application description page.");
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            // Assign a static string to ViewBag.Message.
+            // Ensure that the corresponding View properly encodes this content when rendered.
+            ViewBag.Message = HttpUtility.HtmlEncode("Your contact page.");
 
             return View();
         }
