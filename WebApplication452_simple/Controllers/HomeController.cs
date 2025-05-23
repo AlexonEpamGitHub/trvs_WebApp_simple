@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication452_simple.Controllers
 {
-    public class HomeController : Microsoft.AspNetCore.Mvc.Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {
