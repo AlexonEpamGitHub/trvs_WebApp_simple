@@ -1,0 +1,23 @@
+@model YourNamespace.Models.Country
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    
+    <!-- Add additional fields as necessary -->
+</dl>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</div>
