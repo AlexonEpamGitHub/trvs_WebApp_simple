@@ -4,8 +4,9 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
+using Microsoft.AspNetCore.Mvc;
 // Add services to the container
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options => options.Filters.Add(new HandleErrorAttribute()));
 
 var app = builder.Build();
 
