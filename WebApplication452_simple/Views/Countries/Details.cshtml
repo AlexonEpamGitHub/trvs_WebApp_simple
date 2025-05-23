@@ -1,4 +1,4 @@
-﻿@model WebApplication452_simple.Models.Country
+@model WebApplication452_simple.Models.Country
 
 @{
     ViewBag.Title = "Details";
@@ -11,16 +11,16 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            <label asp-for="Name" class="control-label"></label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            <input asp-for="Name" class="form-control" readonly />
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </p>
