@@ -1,0 +1,34 @@
+@model Country
+
+@{
+    ViewData["Title"] = "Edit Country";
+}
+
+<h2>Edit Country</h2>
+
+<form asp-action="Edit" asp-controller="Countries" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Code" class="control-label"></label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+
+    <input asp-for="Id" type="hidden" />
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" asp-controller="Countries" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.RenderPartialAsync("_ValidationScriptsPartial")
+}
