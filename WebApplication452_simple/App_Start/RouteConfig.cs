@@ -1,29 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
+using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApplication452_simple
 {
-    public class RouteConfig
+    public class Startup
     {
-        public static void RegisterRoutes(RouteCollection routes)
+        public void ConfigureServices(IServiceCollection services)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            services.AddControllersWithViews();
+        }
 
-            routes.MapRoute(
-                name: "Otel",
-                url: "otel/{id}",
-                defaults: new { controller = "Hotels", action = "Details" }
-            );
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseRouting();
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+            app.UseEndpoints(endpoints =>
+            {
+                // Custom route for 'otel/{id}'
+                endpoints.MapControllerRoute(
+                    name: "Otel",
+                    pattern: "otel/{id}",
+                    defaults: new { controller = "Hotels", action = "Details" }
+                );
+
+                // Default route pattern
+                endpoints.MapControllerRoute(
+                    name: "Default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
+            });
         }
     }
 }
