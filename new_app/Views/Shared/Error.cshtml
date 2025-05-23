@@ -3,7 +3,7 @@
 }
 
 <h1 class="text-danger">Error</h1>
-<h4 class="text-danger">An unexpected error has occurred.</h4>
+<h4 class="text-danger">Something went wrong.</h4>
 <p>
     We're sorry for the inconvenience. Please use the navigation above to find your way.
 </p>
@@ -11,7 +11,7 @@
 @if (ViewData["RequestId"] != null)
 {
     <div>
-        <p><strong>Request ID:</strong> @ViewData["RequestId"]</p>
+        <p><strong>Incident ID:</strong> @Html.Encode(ViewData["RequestId"])</p>
     </div>
 }
 
