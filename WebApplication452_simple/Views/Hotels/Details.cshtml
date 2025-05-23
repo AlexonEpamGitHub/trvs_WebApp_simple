@@ -1,66 +1,67 @@
-﻿@model WebApplication452_simple.Models.Hotel
+@model WebApplication452_simple.Models.Hotel
 
 @{
-    ViewBag.Title = "Details";
+    ViewData["Title"] = "Hotel Details";
 }
 
-<h2>Details</h2>
+<h2 class="text-primary">Hotel Details</h2>
 
-<div>
-    <h4>Hotel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stars)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stars)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PricePerNight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PricePerNight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAllInclusive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsAllInclusive)
-        </dd>
-
-    </dl>
+<div class="card mb-3">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Hotel Information</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3 text-secondary font-weight-bold">
+                @Html.DisplayNameFor(model => model.Country.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Country.Name)
+            </dd>
+            
+            <dt class="col-sm-3 text-secondary font-weight-bold">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            
+            <dt class="col-sm-3 text-secondary font-weight-bold">
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.City)
+            </dd>
+            
+            <dt class="col-sm-3 text-secondary font-weight-bold">
+                @Html.DisplayNameFor(model => model.Stars)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Stars)
+            </dd>
+            
+            <dt class="col-sm-3 text-secondary font-weight-bold">
+                @Html.DisplayNameFor(model => model.PricePerNight)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.PricePerNight)
+            </dd>
+            
+            <dt class="col-sm-3 text-secondary font-weight-bold">
+                @Html.DisplayNameFor(model => model.IsAllInclusive)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IsAllInclusive ? "Yes" : "No")
+            </dd>
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="mt-3">
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">
+        <i class="fas fa-edit"></i> Edit
+    </a>
+    <a class="btn btn-secondary" asp-action="Index">
+        <i class="fas fa-arrow-left"></i> Back to List
+    </a>
+</div>
