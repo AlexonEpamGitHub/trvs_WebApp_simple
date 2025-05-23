@@ -1,131 +1,161 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication452_simple.Models;
+using System.Linq;
 
 namespace WebApplication452_simple.Controllers
 {
     public class HotelsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context;
+
+        public HotelsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         // GET: Hotels
-        public ActionResult Index()
+        [HttpGet]
+        public IActionResult Index()
         {
-            var hotels = db.Hotels.Include(h => h.Country);
+            var hotels = _context.Hotels.Include(h => h.Country);
             return View(hotels.ToList());
         }
 
         // GET: Hotels/Details/5
-        public ActionResult Details(int? id)
+        [HttpGet]
+        public IActionResult Details(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest();
             }
-            Hotel hotel = db.Hotels.Find(id);
+
+            var hotel = _context.Hotels.Find(id.Value);
             if (hotel == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
+
             return View(hotel);
         }
 
         // GET: Hotels/Create
-        public ActionResult Create()
+        [HttpGet]
+        public IActionResult Create()
         {
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name");
+            ViewBag.CountryId = new SelectList(_context.Countries, "Id", "Name");
             return View();
         }
 
         // POST: Hotels/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CountryId,City,Stars,PricePerNight,IsAllInclusive")] Hotel hotel)
+        public IActionResult Create([FromForm] Hotel hotel)
         {
             if (ModelState.IsValid)
             {
-                db.Hotels.Add(hotel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                _context.Hotels.Add(hotel);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", hotel.CountryId);
+            ViewBag.CountryId = new SelectList(_context.Countries, "Id", "Name", hotel.CountryId);
             return View(hotel);
         }
 
         // GET: Hotels/Edit/5
-        public ActionResult Edit(int? id)
+        [HttpGet]
+        public IActionResult Edit(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest();
             }
-            Hotel hotel = db.Hotels.Find(id);
+
+            var hotel = _context.Hotels.Find(id.Value);
             if (hotel == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", hotel.CountryId);
+
+            ViewBag.CountryId = new SelectList(_context.Countries, "Id", "Name", hotel.CountryId);
             return View(hotel);
         }
 
         // POST: Hotels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CountryId,City,Stars,PricePerNight,IsAllInclusive")] Hotel hotel)
+        public IActionResult Edit(int id, [FromForm] Hotel hotel)
         {
+            if (id != hotel.Id)
+            {
+                return BadRequest();
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(hotel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    _context.Entry(hotel).State = EntityState.Modified;
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_context.Hotels.Any(e => e.Id == id))
+                    {
+                        return NotFound();
+                    }
+                    throw;
+                }
+                return RedirectToAction(nameof(Index));
             }
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", hotel.CountryId);
+
+            ViewBag.CountryId = new SelectList(_context.Countries, "Id", "Name", hotel.CountryId);
             return View(hotel);
         }
 
         // GET: Hotels/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpGet]
+        public IActionResult Delete(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest();
             }
-            Hotel hotel = db.Hotels.Find(id);
+
+            var hotel = _context.Hotels.Find(id.Value);
             if (hotel == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
+
             return View(hotel);
         }
 
         // POST: Hotels/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            Hotel hotel = db.Hotels.Find(id);
-            db.Hotels.Remove(hotel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var hotel = _context.Hotels.Find(id);
+            if (hotel != null)
+            {
+                _context.Hotels.Remove(hotel);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return NotFound();
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }
