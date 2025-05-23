@@ -6,7 +6,8 @@ namespace WebApplication452_simple
     {
         public static void RegisterGlobalFilters(FilterCollection filters)
         {
-            // No filters are added by default. This method is reserved for future usage.
+            // This method is intentionally left empty. Exception handling is managed in middleware.
+            // Reserved for future usage.
         }
     }
 }
