@@ -1,0 +1,30 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "{your_database_connection_string}"
+  },
+  "AppSettings": {
+    "Environment": "Development",
+    "ApiKeys": {
+      "GoogleMaps": "{your_google_maps_api_key}",
+      "Stripe": "{your_stripe_api_key}"
+    },
+    "Caching": {
+      "ExpirationInMinutes": 60,
+      "CacheProvider": "Memory"
+    },
+    "Localization": {
+      "SupportedLocales": ["en-US", "fr-FR"],
+      "DefaultLocale": "en-US"
+    },
+    "Constants": {
+      "PageSize": 10,
+      "MaxUploadSizeInMB": 20
+    }
+  }
+}
