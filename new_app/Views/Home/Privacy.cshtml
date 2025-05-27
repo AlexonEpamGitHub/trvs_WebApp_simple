@@ -1,28 +1,49 @@
 @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="container">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <hr />
+    
+    <div class="row">
+        <div class="col-md-8">
+            <p class="lead">This page was created using modern ASP.NET Core MVC syntax.</p>
 
-<p>This page was created as part of the migration to ASP.NET Core MVC.</p>
+            <p>When you use our application, we collect certain information about your activity, device, and browser. This information helps us improve our services and provide a better user experience.</p>
 
-<p>Use this page to detail your site's privacy policy.</p>
+            <h2>Information We Collect</h2>
+            <ul class="list-group">
+                <li class="list-group-item">Personal information you provide (name, email address, contact details)</li>
+                <li class="list-group-item">Booking and reservation data</li>
+                <li class="list-group-item">Log data and usage statistics</li>
+                <li class="list-group-item">Device and browser information</li>
+            </ul>
 
-<p>When you use our application, we collect certain information about your activity, device, and browser. This information helps us improve our services and provide a better user experience.</p>
-
-<h2>Information We Collect</h2>
-<ul>
-    <li>Personal information you provide (name, email address, contact details)</li>
-    <li>Booking and reservation data</li>
-    <li>Log data and usage statistics</li>
-    <li>Device and browser information</li>
-</ul>
-
-<h2>How We Use Your Information</h2>
-<ul>
-    <li>To provide and maintain our services</li>
-    <li>To process hotel reservations and bookings</li>
-    <li>To improve our website functionality and user experience</li>
-    <li>To communicate with you about your bookings and account</li>
-</ul>
-
-<p>Last updated: @DateTime.Now.ToString("MMMM yyyy")</p>
+            <h2 class="mt-4">How We Use Your Information</h2>
+            <ul class="list-group">
+                <li class="list-group-item">To provide and maintain our services</li>
+                <li class="list-group-item">To process hotel reservations and bookings</li>
+                <li class="list-group-item">To improve our website functionality and user experience</li>
+                <li class="list-group-item">To communicate with you about your bookings and account</li>
+            </ul>
+            
+            <div class="alert alert-secondary mt-4">
+                <small>Last updated: @DateTimeOffset.Now.ToString("MMMM yyyy")</small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Privacy Links
+                </div>
+                <div class="card-body">
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Terms of Service</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
