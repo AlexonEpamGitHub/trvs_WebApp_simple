@@ -2,32 +2,45 @@
     ViewData["Title"] = "Home Page";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+<main class="container">
+    <section class="row justify-content-center my-5" aria-labelledby="aspnetTitle">
+        <div class="col-md-10 text-center">
+            <h1 id="title" class="display-4">ASP.NET Core</h1>
+            <p class="lead">ASP.NET Core is a cross-platform, high-performance, open-source framework for building modern, cloud-enabled, internet-connected applications.</p>
+            <p><a href="https://docs.microsoft.com/aspnet/core" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>
     </section>
 
-    <div class="row">
+    <div class="row g-4 my-4">
         <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 id="gettingStartedTitle" class="card-title h4">Getting started</h2>
+                    <p class="card-text">
+                        ASP.NET Core MVC provides features to build web APIs and web apps:
+                        The Model-View-Controller pattern helps make your web APIs and web apps testable.
+                    </p>
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Privacy">Learn more &raquo;</a>
+                </div>
+            </div>
         </section>
         <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 id="librariesTitle" class="card-title h4">Get more libraries</h2>
+                    <p class="card-text">NuGet is a package manager for .NET that makes it easy to add, remove, and update libraries and tools in .NET projects.</p>
+                    <a class="btn btn-outline-primary" href="https://www.nuget.org/">Learn more &raquo;</a>
+                </div>
+            </div>
         </section>
         <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 id="hostingTitle" class="card-title h4">Cloud Hosting</h2>
+                    <p class="card-text">You can deploy your ASP.NET Core apps to Azure or other cloud providers with minimal configuration and maximum security.</p>
+                    <a class="btn btn-outline-primary" href="https://azure.microsoft.com/services/app-service/">Learn more &raquo;</a>
+                </div>
+            </div>
         </section>
     </div>
 </main>
