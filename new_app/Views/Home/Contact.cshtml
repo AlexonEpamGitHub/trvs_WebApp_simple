@@ -10,15 +10,39 @@
         <section aria-labelledby="contact-title">
             <h2 id="contact-title" class="visually-hidden">Contact Information</h2>
             <address>
+                <strong>Location:</strong>
                 One Microsoft Way<br />
-                Redmond, WA 98052-6399<br />
-                <abbr title="Phone">P:</abbr> 425.555.0100
+                Redmond, WA 98052-6399
             </address>
+            
+            <div class="contact-info mb-3">
+                <strong>Phone:</strong> <a href="tel:4255550100">425.555.0100</a>
+            </div>
 
-            <address>
-                <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-                <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-            </address>
+            <div class="email-contacts">
+                <div class="mb-2">
+                    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a>
+                </div>
+                <div class="mb-2">
+                    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+                </div>
+            </div>
+            
+            <div class="contact-form mt-4">
+                <partial name="_ContactForm" />
+            </div>
         </section>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Hours</h3>
+            </div>
+            <div class="card-body">
+                <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                <p>Saturday: 10:00 AM - 2:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+        </div>
     </div>
 </div>
