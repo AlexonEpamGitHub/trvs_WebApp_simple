@@ -1,6 +1,6 @@
-using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using HotelReservationSystem.Models;
 
 namespace HotelReservationSystem.Controllers
 {
@@ -24,7 +24,7 @@ namespace HotelReservationSystem.Controllers
 
             return View();
         }
-
+        
         public IActionResult Privacy()
         {
             return View();
