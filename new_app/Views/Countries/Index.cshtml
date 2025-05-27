@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Country List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Country</a>
+</p>
+
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <input type="text" name="SearchString" class="form-control" placeholder="Search by name" value="@ViewData["CurrentFilter"]" />
+    </div>
+    <button type="submit" class="btn btn-secondary">Search</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Capital</th>
+                <th>Population</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var country in Model)
+            {
+                <tr>
+                    <td>@country.Name</td>
+                    <td>@country.Capital</td>
+                    <td>@country.Population</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@country.Id" class="btn btn-info">Details</a>
+                        <a asp-action="Edit" asp-route-id="@country.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@country.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No countries available.</p>
+}
+
+<div>
+    <a asp-action="Index" asp-route-pageNumber="@(ViewData["CurrentPage"] - 1)" class="btn btn-secondary" @(ViewData["DisablePrev"] ? "disabled" : "")>Previous</a>
+    <a asp-action="Index" asp-route-pageNumber="@(ViewData["CurrentPage"] + 1)" class="btn btn-secondary" @(ViewData["DisableNext"] ? "disabled" : "")>Next</a>
+</div>
