@@ -1,0 +1,35 @@
+@model Country
+
+<h2>Create New Country</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ISOCode" class="control-label"></label>
+        <input asp-for="ISOCode" class="form-control" />
+        <span asp-validation-for="ISOCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Region" class="control-label"></label>
+        <input asp-for="Region" class="form-control" />
+        <span asp-validation-for="Region" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Population" class="control-label"></label>
+        <input asp-for="Population" type="number" class="form-control" />
+        <span asp-validation-for="Population" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div>
+    <a asp-action="Index">Back to Country List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
