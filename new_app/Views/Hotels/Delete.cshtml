@@ -1,0 +1,20 @@
+@model Hotel
+
+@{
+    ViewData["Title"] = "Delete Hotel";
+}
+
+<h1>Delete Hotel</h1>
+
+<div class="alert alert-danger" role="alert">
+    Are you sure you want to delete the hotel <strong>@Model.Name</strong>?
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <input type="submit" class="btn btn-danger" value="Delete" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
