@@ -1,0 +1,50 @@
+@model IEnumerable<NewApp.Models.Hotel>
+@{
+    ViewData["Title"] = "Hotels List";
+}
+
+<h2>Hotel Listings</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<form method="get" asp-controller="Hotels" asp-action="Index">
+    <div class="form-group">
+        <label for="filter">Filter by City:</label>
+        <input type="text" name="filter" id="filter" class="form-control" value="@ViewData["Filter"]">
+    </div>
+    <button type="submit" class="btn btn-secondary">Search</button>
+</form>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.City)</th>
+            <th>@Html.DisplayNameFor(model => model.Stars)</th>
+            <th>@Html.DisplayNameFor(model => model.Country)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hotel in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => hotel.Name)</td>
+                <td>@Html.DisplayFor(modelItem => hotel.City)</td>
+                <td>@Html.DisplayFor(modelItem => hotel.Stars)</td>
+                <td>@Html.DisplayFor(modelItem => hotel.Country.Name)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@hotel.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@hotel.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@hotel.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="pagination">
+    @Html.PagedListPager((IPagedList)ViewData["Hotels"], page => Url.Action("Index", new { page }))
+</div>
