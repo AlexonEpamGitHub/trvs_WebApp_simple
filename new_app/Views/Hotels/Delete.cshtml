@@ -1,0 +1,35 @@
+@model Hotel
+
+<h2>Delete Hotel</h2>
+
+<p>Are you sure you want to delete the following hotel?</p>
+
+<table>
+    <tr>
+        <td><strong>Name:</strong></td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td><strong>Stars:</strong></td>
+        <td>@Model.Stars</td>
+    </tr>
+    <tr>
+        <td><strong>Country:</strong></td>
+        <td>@Model.Country</td>
+    </tr>
+    <tr>
+        <td><strong>City:</strong></td>
+        <td>@Model.City</td>
+    </tr>
+    <tr>
+        <td><strong>Price:</strong></td>
+        <td>@Model.Price</td>
+    </tr>
+</table>
+
+<form asp-action="Delete" asp-controller="Hotels" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" asp-controller="Hotels" class="btn btn-secondary">Cancel</a>
+</form>
