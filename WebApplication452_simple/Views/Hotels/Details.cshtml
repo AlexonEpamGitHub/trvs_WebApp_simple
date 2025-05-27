@@ -1,66 +1,46 @@
-﻿@model WebApplication452_simple.Models.Hotel
+@model WebApplication452_simple.Models.Hotel
 
 @{
-    ViewBag.Title = "Details";
+    ViewData["Title"] = "Hotel Details";
 }
 
-<h2>Details</h2>
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Country</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Country.Name)</dd>
+
+            <dt class="col-sm-4">Name</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+
+            <dt class="col-sm-4">City</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.City)</dd>
+
+            <dt class="col-sm-4">Stars</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Stars)</dd>
+
+            <dt class="col-sm-4">Price Per Night</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.PricePerNight)</dd>
+
+            <dt class="col-sm-4">All Inclusive</dt>
+            <dd class="col-sm-8">
+                @if (Model.IsAllInclusive)
+                {
+                    <span class="badge badge-success">Yes</span>
+                }
+                else
+                {
+                    <span class="badge badge-secondary">No</span>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
 
 <div>
-    <h4>Hotel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stars)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stars)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PricePerNight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PricePerNight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAllInclusive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsAllInclusive)
-        </dd>
-
-    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
