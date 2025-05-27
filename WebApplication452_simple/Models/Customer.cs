@@ -1,18 +1,34 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebApplication452_simple.Models
+namespace ModernizedApp.Models
 {
     public class Customer
     {
-        public int Id { get; set; }
+        [Key]
+        public int CustomerId { get; set; }
 
         [Required]
+        [MaxLength(100)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string LastName { get; set; }
+
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
+
+        [Required]
+        [EmailAddress]
         [MaxLength(255)]
-        public string Name { get; set; }
+        public string Email { get; set; }
+
+        [Phone]
+        [MaxLength(15)]
+        public string Phone { get; set; }
 
         public DateTime? Birthdate { get; set; }
     }
