@@ -2,44 +2,68 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="bg-light p-5 rounded-3 mb-4">
-    <div class="container-fluid">
-        <h1 class="display-4">Hotel Reservation System</h1>
-        <p class="lead">Welcome to our hotel reservation system. Book your stay today!</p>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-4">
+                <h1 class="display-5 fw-bold" id="title">Hotel Reservation System</h1>
+                <p class="col-md-8 fs-4">
+                    Welcome to our modern hotel booking platform built with ASP.NET Core MVC
+                </p>
+                <a asp-controller="Hotels" asp-action="Index" class="btn btn-primary btn-lg mt-2">Browse Hotels &raquo;</a>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h2 class="card-title">Hotels</h2>
-                <p class="card-text">Browse our selection of hotels.</p>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-primary" asp-controller="Hotels" asp-action="Index">View Hotels</a>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h2 class="card-title">Countries</h2>
-                <p class="card-text">Browse hotels by country.</p>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-primary" asp-controller="Countries" asp-action="Index">View Countries</a>
+    <div class="row g-4 mt-2">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h2 class="fs-4" id="gettingStartedTitle">Getting started</h2>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Find your perfect stay with our easy-to-use hotel booking system. 
+                        Browse hotels by location, amenities, and price range.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Home" asp-action="About" class="btn btn-outline-primary">Learn more &raquo;</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h2 class="card-title">Contact</h2>
-                <p class="card-text">Contact us for assistance.</p>
+        
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h2 class="fs-4" id="countriesTitle">Destinations</h2>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Explore a wide range of destinations and find the perfect location for your next vacation.
+                        View hotels by country and city.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Countries" asp-action="Index" class="btn btn-outline-primary">Browse countries &raquo;</a>
+                </div>
             </div>
-            <div class="card-footer">
-                <a class="btn btn-primary" asp-controller="Home" asp-action="Contact">Contact Us</a>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h2 class="fs-4" id="hostingTitle">Our Services</h2>
+                </div>
+                <div class="card-body">
+                    <p>
+                        We offer competitive prices and excellent customer service. Whether you're looking 
+                        for luxury or budget-friendly accommodations, we've got you covered.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-primary">Contact us &raquo;</a>
+                </div>
             </div>
         </div>
     </div>
