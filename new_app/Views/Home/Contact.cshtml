@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<main aria-labelledby="contact-title">
+    <h2 id="contact-title">@ViewData["Title"]</h2>
+    <h3>@ViewData["Message"]</h3>
+
+    <address>
+        <strong>Our Address:</strong><br>
+        123 Main Street<br>
+        Anytown, USA 12345<br>
+    </address>
+
+    <section>
+        <h4>Support</h4>
+        <p>Email: <a href="mailto:support@example.com">support@example.com</a></p>
+    </section>
+
+    <section>
+        <h4>Marketing</h4>
+        <p>Email: <a href="mailto:marketing@example.com">marketing@example.com</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Our Company</p>
+    </footer>
+</main>
+
+<style>
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    address {
+        font-style: normal;
+        margin-bottom: 1rem;
+    }
+
+    section {
+        margin-bottom: 1rem;
+    }
+</style>
