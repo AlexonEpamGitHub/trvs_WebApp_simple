@@ -1,7 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HotelReservationSystem.Models;
@@ -122,7 +118,6 @@ namespace HotelReservationSystem.Controllers
             {
                 return NotFound();
             }
-
             return View(country);
         }
 
@@ -137,7 +132,6 @@ namespace HotelReservationSystem.Controllers
                 _context.Countries.Remove(country);
                 await _context.SaveChangesAsync();
             }
-            
             return RedirectToAction(nameof(Index));
         }
 
