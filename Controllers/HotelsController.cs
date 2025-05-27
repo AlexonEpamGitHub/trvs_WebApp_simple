@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +33,8 @@ namespace HotelReservationSystem.Controllers
                 return BadRequest();
             }
             
-            var hotel = await _context.Hotels.Include(h => h.Country)
+            var hotel = await _context.Hotels
+                .Include(h => h.Country)
                 .FirstOrDefaultAsync(m => m.Id == id);
                 
             if (hotel == null)
@@ -48,6 +53,8 @@ namespace HotelReservationSystem.Controllers
         }
 
         // POST: Hotels/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,CountryId,City,Stars,PricePerNight,IsAllInclusive")] Hotel hotel)
@@ -82,6 +89,8 @@ namespace HotelReservationSystem.Controllers
         }
 
         // POST: Hotels/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CountryId,City,Stars,PricePerNight,IsAllInclusive")] Hotel hotel)
@@ -124,7 +133,8 @@ namespace HotelReservationSystem.Controllers
                 return BadRequest();
             }
 
-            var hotel = await _context.Hotels.Include(h => h.Country)
+            var hotel = await _context.Hotels
+                .Include(h => h.Country)
                 .FirstOrDefaultAsync(m => m.Id == id);
                 
             if (hotel == null)
