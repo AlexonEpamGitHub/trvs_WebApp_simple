@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using WebApplication452_simple.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication452_simple.Models
 {
@@ -12,10 +9,12 @@ namespace WebApplication452_simple.Models
         public int Id { get; set; }
 
         [Required]
-        public Customer Customer { get; set; }
-        
+        public int? CustomerId { get; set; }
+        public Customer? Customer { get; set; }
+
         [Required]
-        public Hotel Hotel { get; set; }
+        public int? HotelId { get; set; }
+        public Hotel? Hotel { get; set; }
 
         [Required]
         public DateTime DateOrdered { get; set; }
@@ -26,8 +25,10 @@ namespace WebApplication452_simple.Models
         [Required]
         public DateTime EndDate { get; set; }
 
-        public int NumberOfDays { get; set; }
+        [NotMapped]
+        public int NumberOfDays => (EndDate - StartDate).Days;
 
+        [Column(TypeName = "decimal(18, 2)")]
         public double FullPrice { get; set; }
     }
 }
