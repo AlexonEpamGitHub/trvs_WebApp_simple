@@ -1,3 +1,7 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HotelReservationSystem.Models;
@@ -26,15 +30,11 @@ namespace HotelReservationSystem.Controllers
             {
                 return BadRequest();
             }
-
-            var country = await _context.Countries
-                .FirstOrDefaultAsync(m => m.Id == id);
-                
+            var country = await _context.Countries.FindAsync(id);
             if (country == null)
             {
                 return NotFound();
             }
-
             return View(country);
         }
 
@@ -45,6 +45,8 @@ namespace HotelReservationSystem.Controllers
         }
 
         // POST: Countries/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Country country)
@@ -75,6 +77,8 @@ namespace HotelReservationSystem.Controllers
         }
 
         // POST: Countries/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Country country)
@@ -117,7 +121,6 @@ namespace HotelReservationSystem.Controllers
 
             var country = await _context.Countries
                 .FirstOrDefaultAsync(m => m.Id == id);
-                
             if (country == null)
             {
                 return NotFound();
