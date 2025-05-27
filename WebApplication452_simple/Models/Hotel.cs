@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using WebApplication452_simple.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication452_simple.Models
+namespace HotelReservationSystem.Models
 {
     public class Hotel
     {
@@ -13,9 +8,9 @@ namespace WebApplication452_simple.Models
 
         [Required]
         [MaxLength(255)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public Country Country { get; set; }
+        public Country? Country { get; set; }
 
         [Required]
         [Display(Name = "Country")]
@@ -23,10 +18,10 @@ namespace WebApplication452_simple.Models
 
         [Required]
         [MaxLength(50)]
-        public string City { get; set; }
+        public string City { get; set; } = string.Empty;
 
         [Required]
-        [Range(1,5)]
+        [Range(1, 5)]
         public int Stars { get; set; }
 
         [Required]
