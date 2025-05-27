@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HotelReservationSystem.Models
@@ -9,7 +11,9 @@ namespace HotelReservationSystem.Models
         [Required]
         [MaxLength(255)]
         public string Name { get; set; } = string.Empty;
-        
+
+        public DateTime? Birthdate { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
