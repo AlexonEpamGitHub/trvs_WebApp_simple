@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservationSystem.Models
 {
@@ -18,7 +18,7 @@ namespace HotelReservationSystem.Models
         {
             base.OnModelCreating(modelBuilder);
             
-            // Configure entity relationships if needed
+            // Configure relationships if needed
             modelBuilder.Entity<Hotel>()
                 .HasOne(h => h.Country)
                 .WithMany(c => c.Hotels)
