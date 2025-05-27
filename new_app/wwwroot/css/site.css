@@ -1,0 +1,84 @@
+/* Root variables */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #F44336;
+    --font-main: 'Roboto', sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.5;
+}
+/* Typography */
+body {
+    font-family: var(--font-main);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: #333;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 0.5em;
+    font-weight: 700;
+    line-height: 1.2;
+}
+/* Layout */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+/* Navigation */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar .nav-item a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+}
+/* Buttons */
+button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+button:hover {
+    background-color: var(--secondary-color);
+}
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+table th {
+    background-color: #f4f4f4;
+}
+/* Forms */
+input, textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+/* Responsive design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+    .navbar .nav-item a {
+        padding: 10px;
+        display: block;
+    }
+}
