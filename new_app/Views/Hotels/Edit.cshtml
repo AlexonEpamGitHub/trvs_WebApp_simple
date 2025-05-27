@@ -13,38 +13,44 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group mb-3">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="form-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="CountryId" class="control-label">Country</label>
+                <label asp-for="CountryId" class="form-label">Country</label>
                 <select asp-for="CountryId" class="form-select" asp-items="ViewBag.CountryId"></select>
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="City" class="control-label"></label>
+                <label asp-for="City" class="form-label"></label>
                 <input asp-for="City" class="form-control" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="Stars" class="control-label"></label>
-                <input asp-for="Stars" class="form-control" />
+                <label asp-for="Stars" class="form-label"></label>
+                <input asp-for="Stars" class="form-control" type="number" min="1" max="5" />
                 <span asp-validation-for="Stars" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="PricePerNight" class="control-label"></label>
-                <input asp-for="PricePerNight" class="form-control" />
+                <label asp-for="PricePerNight" class="form-label"></label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input asp-for="PricePerNight" class="form-control" type="number" step="0.01" min="0" />
+                </div>
                 <span asp-validation-for="PricePerNight" class="text-danger"></span>
             </div>
             <div class="form-group mb-3 form-check">
-                <label class="form-check-label">
-                    <input asp-for="IsAllInclusive" class="form-check-input" /> @Html.DisplayNameFor(model => model.IsAllInclusive)
-                </label>
+                <input asp-for="IsAllInclusive" class="form-check-input" />
+                <label asp-for="IsAllInclusive" class="form-check-label"></label>
             </div>
             <div class="form-group mb-3">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save"></i> Save
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to List
+                </a>
             </div>
         </form>
     </div>
@@ -52,4 +58,17 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function() {
+            // Client-side validation enhancement
+            $.validator.addMethod("positiveNumber", function(value, element) {
+                return value > 0;
+            }, "Please enter a positive number.");
+            
+            $("#Stars").rules("add", { 
+                range: [1, 5],
+                messages: { range: "Stars must be between 1 and 5" }
+            });
+        });
+    </script>
 }
