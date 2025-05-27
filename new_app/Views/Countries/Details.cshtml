@@ -1,0 +1,19 @@
+@model new_app.Models.Country
+
+@{
+    ViewData["Title"] = "Country Details";
+}
+
+<h2>Country Details</h2>
+
+<div class="card">
+    <div class="card-header">
+        @Model.Name
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Population: @Model.Population</h5>
+        <p class="card-text">Region: @Model.Region</p>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>
