@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Hotel Listing";
+}
+
+<h2>Hotel Listing</h2>
+
+<!-- Search bar -->
+<div class="form-group">
+    <input type="text" class="form-control" id="searchHotels" placeholder="Search hotels..." />
+</div>
+
+<!-- Hotel table -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><a asp-action="Index" asp-route-sortOrder="name">Name</a></th>
+            <th>Address</th>
+            <th><a asp-action="Index" asp-route-sortOrder="rating">Star Rating</a></th>
+            <th>Review Count</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="hotelList">
+        @foreach (var hotel in Model.Hotels)
+        {
+            <tr>
+                <td>@hotel.Name</td>
+                <td>@hotel.Address</td>
+                <td>@hotel.StarRating</td>
+                <td>@hotel.ReviewCount</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@hotel.Id" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@hotel.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination controls -->
+<nav>
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex - 1)" aria-label="Previous">Previous</a></li>
+        <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex + 1)" aria-label="Next">Next</a></li>
+    </ul>
+</nav>
+
+<!-- AJAX for search functionality -->
+<script>
+    document.getElementById('searchHotels').addEventListener('keyup', function() {
+        const query = this.value;
+        fetch(`/Hotels/Search?query=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                let tableRows = '';
+                data.forEach(hotel => {
+                    tableRows += `
+                        <tr>
+                            <td>${hotel.name}</td>
+                            <td>${hotel.address}</td>
+                            <td>${hotel.starRating}</td>
+                            <td>${hotel.reviewCount}</td>
+                            <td>
+                                <a href="/Hotels/Edit/${hotel.id}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="/Hotels/Delete/${hotel.id}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>`;
+                });
+                document.getElementById('hotelList').innerHTML = tableRows;
+            });
+    });
+</script>
