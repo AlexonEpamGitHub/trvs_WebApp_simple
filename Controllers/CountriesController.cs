@@ -26,11 +26,15 @@ namespace HotelReservationSystem.Controllers
             {
                 return BadRequest();
             }
-            var country = await _context.Countries.FindAsync(id);
+            
+            var country = await _context.Countries
+                .FirstOrDefaultAsync(m => m.Id == id);
+                
             if (country == null)
             {
                 return NotFound();
             }
+
             return View(country);
         }
 
@@ -41,7 +45,6 @@ namespace HotelReservationSystem.Controllers
         }
 
         // POST: Countries/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Country country)
@@ -52,7 +55,6 @@ namespace HotelReservationSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
             return View(country);
         }
 
@@ -63,6 +65,7 @@ namespace HotelReservationSystem.Controllers
             {
                 return BadRequest();
             }
+
             var country = await _context.Countries.FindAsync(id);
             if (country == null)
             {
@@ -72,7 +75,6 @@ namespace HotelReservationSystem.Controllers
         }
 
         // POST: Countries/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Country country)
@@ -112,12 +114,15 @@ namespace HotelReservationSystem.Controllers
             {
                 return BadRequest();
             }
+
             var country = await _context.Countries
                 .FirstOrDefaultAsync(m => m.Id == id);
+                
             if (country == null)
             {
                 return NotFound();
             }
+
             return View(country);
         }
 
@@ -132,6 +137,7 @@ namespace HotelReservationSystem.Controllers
                 _context.Countries.Remove(country);
                 await _context.SaveChangesAsync();
             }
+            
             return RedirectToAction(nameof(Index));
         }
 
