@@ -6,11 +6,15 @@ namespace HotelReservationSystem.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public Customer? Customer { get; set; }
-        
+
         [Required]
+        public int CustomerId { get; set; }
+
         public Hotel? Hotel { get; set; }
+
+        [Required]
+        public int HotelId { get; set; }
 
         [Required]
         public DateTime DateOrdered { get; set; }
