@@ -4,11 +4,11 @@
     ViewData["Title"] = "Create Hotel";
 }
 
-<h2>Create Hotel</h2>
+<h1>Create Hotel</h1>
 
 <hr />
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
@@ -20,7 +20,7 @@
             
             <div class="form-group mb-3">
                 <label asp-for="CountryId" class="control-label"></label>
-                <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
+                <select asp-for="CountryId" class="form-select" asp-items="ViewBag.CountryId"></select>
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
             
@@ -32,13 +32,13 @@
             
             <div class="form-group mb-3">
                 <label asp-for="Stars" class="control-label"></label>
-                <input asp-for="Stars" class="form-control" />
+                <input asp-for="Stars" class="form-control" min="1" max="5" />
                 <span asp-validation-for="Stars" class="text-danger"></span>
             </div>
             
             <div class="form-group mb-3">
                 <label asp-for="PricePerNight" class="control-label"></label>
-                <input asp-for="PricePerNight" class="form-control" />
+                <input asp-for="PricePerNight" class="form-control" step="0.01" min="0" />
                 <span asp-validation-for="PricePerNight" class="text-danger"></span>
             </div>
             
@@ -49,14 +49,11 @@
             </div>
             
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
