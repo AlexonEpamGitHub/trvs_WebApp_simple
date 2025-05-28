@@ -1,6 +1,8 @@
 /* Custom site styles */
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -13,13 +15,9 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
   margin-bottom: 60px;
+  padding-top: 1rem;
 }
 
 /* Format tables */
@@ -28,8 +26,9 @@ body {
 }
 
 /* Format page headers */
-h2 {
+h1, h2, h3, h4 {
   margin-bottom: 1rem;
+  color: #333;
 }
 
 /* Add space after form groups */
@@ -37,9 +36,28 @@ h2 {
   margin-bottom: 1rem;
 }
 
+/* Format validation messages */
+.validation-summary-errors {
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+/* Format validation errors */
+.field-validation-error {
+  font-size: 80%;
+}
+
 /* Footer styling */
 footer {
   margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid #e5e5e5;
+}
+
+/* Jumbotron (Bootstrap 5 no longer includes this) */
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
 }
