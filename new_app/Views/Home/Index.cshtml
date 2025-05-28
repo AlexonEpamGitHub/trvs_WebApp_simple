@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Hotel Reservation System</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Hotels</h3>
+                </div>
+                <div class="card-body">
+                    <p>Browse and manage hotels in our system.</p>
+                    <a asp-controller="Hotels" asp-action="Index" class="btn btn-primary">View Hotels</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Countries</h3>
+                </div>
+                <div class="card-body">
+                    <p>View and manage countries in our system.</p>
+                    <a asp-controller="Countries" asp-action="Index" class="btn btn-primary">View Countries</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
