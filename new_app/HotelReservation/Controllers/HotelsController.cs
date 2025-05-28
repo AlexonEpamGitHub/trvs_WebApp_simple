@@ -8,16 +8,21 @@ namespace HotelReservation.Controllers
     public class HotelsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<HotelsController> _logger;
 
-        public HotelsController(ApplicationDbContext context)
+        public HotelsController(ApplicationDbContext context, ILogger<HotelsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Hotels
         public async Task<IActionResult> Index()
         {
-            var hotels = await _context.Hotels.Include(h => h.Country).ToListAsync();
+            var hotels = await _context.Hotels
+                .Include(h => h.Country)
+                .ToListAsync();
+                
             return View(hotels);
         }
 
@@ -44,7 +49,7 @@ namespace HotelReservation.Controllers
         // GET: Hotels/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.CountryId = new SelectList(await _context.Countries.ToListAsync(), "Id", "Name");
+            ViewData["CountryId"] = new SelectList(await _context.Countries.ToListAsync(), "Id", "Name");
             return View();
         }
 
@@ -57,10 +62,11 @@ namespace HotelReservation.Controllers
             {
                 _context.Add(hotel);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("Hotel {Name} created successfully", hotel.Name);
                 return RedirectToAction(nameof(Index));
             }
             
-            ViewBag.CountryId = new SelectList(await _context.Countries.ToListAsync(), "Id", "Name", hotel.CountryId);
+            ViewData["CountryId"] = new SelectList(await _context.Countries.ToListAsync(), "Id", "Name", hotel.CountryId);
             return View(hotel);
         }
 
@@ -79,7 +85,7 @@ namespace HotelReservation.Controllers
                 return NotFound();
             }
             
-            ViewBag.CountryId = new SelectList(await _context.Countries.ToListAsync(), "Id", "Name", hotel.CountryId);
+            ViewData["CountryId"] = new SelectList(await _context.Countries.ToListAsync(), "Id", "Name", hotel.CountryId);
             return View(hotel);
         }
 
@@ -99,10 +105,11 @@ namespace HotelReservation.Controllers
                 {
                     _context.Update(hotel);
                     await _context.SaveChangesAsync();
+                    _logger.LogInformation("Hotel {Name} updated successfully", hotel.Name);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HotelExists(hotel.Id))
+                    if (!await HotelExistsAsync(hotel.Id))
                     {
                         return NotFound();
                     }
@@ -114,7 +121,7 @@ namespace HotelReservation.Controllers
                 return RedirectToAction(nameof(Index));
             }
             
-            ViewBag.CountryId = new SelectList(await _context.Countries.ToListAsync(), "Id", "Name", hotel.CountryId);
+            ViewData["CountryId"] = new SelectList(await _context.Countries.ToListAsync(), "Id", "Name", hotel.CountryId);
             return View(hotel);
         }
 
@@ -144,18 +151,20 @@ namespace HotelReservation.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var hotel = await _context.Hotels.FindAsync(id);
+            
             if (hotel != null)
             {
                 _context.Hotels.Remove(hotel);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("Hotel {Name} deleted successfully", hotel.Name);
             }
             
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HotelExists(int id)
+        private Task<bool> HotelExistsAsync(int id)
         {
-            return _context.Hotels.Any(e => e.Id == id);
+            return _context.Hotels.AnyAsync(e => e.Id == id);
         }
     }
 }
