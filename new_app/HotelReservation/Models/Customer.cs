@@ -7,13 +7,15 @@ namespace HotelReservation.Models
         public int Id { get; set; }
         
         [Required]
-        [MaxLength(100)]
-        public string Name { get; set; } = string.Empty;
+        [StringLength(100)]
+        public required string Name { get; set; } = string.Empty;
         
         [Required]
-        [MaxLength(100)]
-        public string Email { get; set; } = string.Empty;
+        [StringLength(100)]
+        [EmailAddress]
+        public required string Email { get; set; } = string.Empty;
         
-        public List<Order> Orders { get; set; } = new List<Order>();
+        // Navigation property
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }
