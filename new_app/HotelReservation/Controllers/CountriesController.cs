@@ -7,10 +7,12 @@ namespace HotelReservation.Controllers
     public class CountriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<CountriesController> _logger;
 
-        public CountriesController(ApplicationDbContext context)
+        public CountriesController(ApplicationDbContext context, ILogger<CountriesController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Countries
@@ -28,7 +30,8 @@ namespace HotelReservation.Controllers
             }
             
             var country = await _context.Countries
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(c => c.Hotels)
+                .FirstOrDefaultAsync(c => c.Id == id);
                 
             if (country == null)
             {
@@ -53,6 +56,7 @@ namespace HotelReservation.Controllers
             {
                 _context.Add(country);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("Country {Name} created successfully", country.Name);
                 return RedirectToAction(nameof(Index));
             }
             return View(country);
@@ -92,10 +96,11 @@ namespace HotelReservation.Controllers
                 {
                     _context.Update(country);
                     await _context.SaveChangesAsync();
+                    _logger.LogInformation("Country {Name} updated successfully", country.Name);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CountryExists(country.Id))
+                    if (!await CountryExistsAsync(country.Id))
                     {
                         return NotFound();
                     }
@@ -118,13 +123,15 @@ namespace HotelReservation.Controllers
             }
             
             var country = await _context.Countries
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(c => c.Hotels)
+                .FirstOrDefaultAsync(c => c.Id == id);
                 
             if (country == null)
             {
                 return NotFound();
             }
             
+            ViewData["HasHotels"] = country.Hotels.Any();
             return View(country);
         }
 
@@ -133,19 +140,30 @@ namespace HotelReservation.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var country = await _context.Countries.FindAsync(id);
+            var country = await _context.Countries
+                .Include(c => c.Hotels)
+                .FirstOrDefaultAsync(c => c.Id == id);
+                
             if (country != null)
             {
+                if (country.Hotels.Any())
+                {
+                    ModelState.AddModelError(string.Empty, "Cannot delete country that has hotels associated with it.");
+                    ViewData["HasHotels"] = true;
+                    return View(country);
+                }
+                
                 _context.Countries.Remove(country);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("Country {Name} deleted successfully", country.Name);
             }
             
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CountryExists(int id)
+        private Task<bool> CountryExistsAsync(int id)
         {
-            return _context.Countries.Any(e => e.Id == id);
+            return _context.Countries.AnyAsync(e => e.Id == id);
         }
     }
 }
