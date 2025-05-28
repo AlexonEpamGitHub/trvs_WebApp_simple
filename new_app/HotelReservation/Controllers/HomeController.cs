@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using HotelReservation.Models;
 
 namespace HotelReservation.Controllers
@@ -13,27 +14,31 @@ namespace HotelReservation.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            _logger.LogInformation("Index page visited");
+            return await Task.FromResult(View());
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> About()
         {
             ViewData["Message"] = "Your application description page.";
-            return View();
+            _logger.LogInformation("About page visited");
+            return await Task.FromResult(View());
         }
 
-        public IActionResult Contact()
+        public async Task<IActionResult> Contact()
         {
             ViewData["Message"] = "Your contact page.";
-            return View();
+            _logger.LogInformation("Contact page visited");
+            return await Task.FromResult(View());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _logger.LogError("Error page accessed with ID: {RequestId}", Activity.Current?.Id ?? HttpContext.TraceIdentifier);
+            return await Task.FromResult(View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }));
         }
     }
 
