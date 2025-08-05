@@ -1,18 +1,18 @@
 using System;
-using System.
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
-namespace WebApplication_Core.Models;
-
-public class Country
+namespace WebApplicationCore.Models
 {
-    public int Id { get; set; }
+    public class Country
+    {
+        public int Id { get; set; }
 
-    [Required]
-    [MaxLength(50)]
-    public string Name { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; }
 
-    public virtual ICollection<Hotel> Hotels { get; set; }
+        // Navigation property for related Hotels (added to support EF Core relationships)
+        public virtual ICollection<Hotel> Hotels { get; set; }
+    }
 }
