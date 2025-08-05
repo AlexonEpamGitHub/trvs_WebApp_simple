@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebApplication_Core.Models
+namespace WebApplicationCore.Models
 {
     public class Hotel
     {
