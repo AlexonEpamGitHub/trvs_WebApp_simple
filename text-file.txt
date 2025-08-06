@@ -1,0 +1,9 @@
+This is a test file for the app-migration branch.
+It will be used as a placeholder while we work on migrating the application from .NET Framework 4.5.2 to .NET Core 8.
+
+Migration steps will include:
+1. Creating a new .NET Core 8 project
+2. Migrating models and database context
+3. Updating controllers and views
+4. Implementing dependency injection
+5. Configuring middleware and services
